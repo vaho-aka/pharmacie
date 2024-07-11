@@ -1,5 +1,12 @@
+import Layout from './Layout/Layout';
+import Home from './Pages/Home';
+
 const App = () => {
-  return <div className="mx-4">Hello, world</div>;
+  return (
+    <Layout>
+      <Home />
+    </Layout>
+  );
 };
 
 export default App;
