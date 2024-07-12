@@ -50,6 +50,10 @@ body {
   animation: spinner 1.2s linear infinite;
 }
 
+.calc {
+  height: calc(100vh - 120px);
+}
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);
