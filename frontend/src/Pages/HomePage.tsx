@@ -1,4 +1,9 @@
-import { RiArchive2Line, RiCapsuleLine } from 'react-icons/ri';
+import {
+  RiArchive2Line,
+  RiArrowRightLine,
+  RiCapsuleLine,
+} from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -9,30 +14,41 @@ const Home = () => {
             Pharmacy
           </h1>
         </div>
-        <div className="flex flex-col lg:px-16 lg:w-[45rem]">
-          <h4 className="text-center lg:text-left pb-16 px-10 lg:px-0">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
-            ipsam ullam. Velit assumenda sint eligendi, dolorem dolore sed
-            expedita ea magni sequi quia ad est, quisquam pariatur consequatur
-            quidem provident!
-          </h4>
-          <div className="justify-center lg:justify-start flex-col md:flex-row flex lg:items-center lg:px-0 px-10 gap-10 pb-16">
-            <div className="flex gap-2 items-center">
-              <div className="w-16 h-16 flex items-center justify-center bg-neutral-800 rounded-full">
-                <RiArchive2Line size={30} className="text-white" />
+        <div className="lg:px-16 flex-col flex md:flex-row">
+          <div className="flex flex-col flex-1 lg:w-[45rem]">
+            <h4 className="text-center lg:text-left pb-16 px-10 lg:px-0">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
+              ipsam ullam. Velit assumenda sint eligendi, dolorem dolore sed
+              expedita ea magni sequi quia ad est, quisquam pariatur consequatur
+              quidem provident!
+            </h4>
+            <div className="justify-center lg:justify-start flex-col md:flex-row flex lg:items-center lg:px-0 px-10 gap-10 pb-16">
+              <div className="flex gap-2 items-center">
+                <div className="w-16 h-16 flex items-center justify-center bg-neutral-800 rounded-full">
+                  <RiArchive2Line size={30} className="text-white" />
+                </div>
+                <div className="flex flex-col">
+                  <span>Delivery </span> <span>to your doorstep</span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <span>Delivery </span> <span>to your doorstep</span>
+              <div className="flex gap-2 items-center">
+                <div className="w-16 h-16 flex items-center justify-center bg-neutral-800 rounded-full">
+                  <RiCapsuleLine size={30} className="text-white" />
+                </div>
+                <div className="flex flex-col ">
+                  <span>100 % genuine</span> <span>medicines</span>
+                </div>
               </div>
             </div>
-            <div className="flex gap-2 items-center">
-              <div className="w-16 h-16 flex items-center justify-center bg-neutral-800 rounded-full">
-                <RiCapsuleLine size={30} className="text-white" />
-              </div>
-              <div className="flex flex-col ">
-                <span>100 % genuine</span> <span>medicines</span>
-              </div>
-            </div>
+          </div>
+          <div className="flex-1 flex justify-center items-center">
+            <Link
+              to="/products"
+              className="py-2 px-6 bg-lime-900 rounded text-lime-500 flex items-center gap-2 text-xl font-semibold"
+            >
+              <span>View all products</span>
+              <RiArrowRightLine />
+            </Link>
           </div>
         </div>
       </div>

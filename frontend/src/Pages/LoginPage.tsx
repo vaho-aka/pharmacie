@@ -29,7 +29,7 @@ const LoginPage = () => {
     <div className="flex calc">
       <div className="flex-1 flex justify-center items-center">
         <div className="w-full">
-          <h1 className="font-semibold text-xl py-10 text-center">
+          <h1 className="font-semibold text-[5vw] py-10 text-center">
             Welcome back
           </h1>
           <form className="max-w-[35rem] w-full mx-auto gap-4 flex flex-col">

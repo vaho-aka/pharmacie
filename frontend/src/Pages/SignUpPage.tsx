@@ -29,8 +29,8 @@ const SignUpPage = () => {
     <div className="flex calc">
       <div className="flex-1 flex justify-center items-center">
         <div className="w-full">
-          <h1 className="font-semibold text-xl py-10 text-center">
-            Create your own account here
+          <h1 className="font-semibold text-[5vw] py-10 text-center">
+            Create account
           </h1>
           <form className="max-w-[35rem] w-full mx-auto gap-4 flex flex-col">
             <div className="flex flex-col gap-2 mb-2">

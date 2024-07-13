@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { RiShoppingCartLine } from 'react-icons/ri';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
-  const { pathname } = useLocation();
-  const [showLogin, setShowLogin] = useState(true);
+  // const { pathname } = useLocation();
+  // const [showLogin, setShowLogin] = useState(true);
 
-  useEffect(() => {
-    if (pathname.includes('login')) setShowLogin(false);
-    else setShowLogin(true);
-  }, [pathname]);
+  // useEffect(() => {
+  //   if (pathname.includes('login')) setShowLogin(false);
+  //   else setShowLogin(true);
+  // }, [pathname]);
 
   return (
     <nav className="bg-gray-200 rounded-md flex items-center justify-between py-4 px-6 mb-4">
@@ -25,13 +25,11 @@ const Navigation = () => {
             </div>
           </button>
         </li>
-        {showLogin && (
-          <li className="px-4 py-2 bg-lime-500 rounded-lg text-white font-semibold">
-            <Link to="/login" className="flex items-center gap-2 px-6">
-              <span>Login</span>
-            </Link>
-          </li>
-        )}
+        <li className="px-4 py-2 bg-lime-500 rounded-lg text-white font-semibold">
+          <Link to="/login" className="flex items-center gap-2 px-6">
+            <span>Login</span>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
