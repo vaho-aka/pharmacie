@@ -4,10 +4,12 @@ import { Action } from 'redux';
 
 // * @Reducers
 import cartReducer from './Reducers/cartReducer.ts';
+import userReducer from './Reducers/userReducer.ts';
 
 const store = configureStore({
   reducer: {
     cart: cartReducer,
+    user: userReducer,
   },
   devTools: true,
 });
