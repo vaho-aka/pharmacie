@@ -1,16 +1,26 @@
-import {
-  RiArchive2Line,
-  RiArrowRightLine,
-  RiCapsuleLine,
-} from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { RiArchive2Line, RiCapsuleLine } from 'react-icons/ri';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import Card from '../Layout/Card';
+import { getProducts } from '../actions/productActions';
 
 const Home = () => {
+  const dispatch = useAppDispatch();
+  const { products } = useAppSelector((state) => state.product);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log(products);
+  });
+
   return (
     <div className="">
-      <div className="bg-lime-500 calc flex flex-col justify-center w-full rounded-3xl">
+      <div className="bg-lime-500 flex flex-col justify-center w-full rounded-md">
         <div className="w-full">
-          <h1 className="text-lime-900 text-[18vw] lg:pr-2 font-bold text-center">
+          <h1 className="text-lime-900 text-[10vw] lg:pr-2 font-bold text-center">
             Pharmacy
           </h1>
         </div>
@@ -43,16 +53,12 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex-1 flex justify-center items-center">
-            <Link
-              to="/products"
-              className="py-2 px-6 bg-lime-900 rounded text-lime-500 flex items-center gap-2 text-xl font-semibold"
-            >
-              <span>View all products</span>
-              <RiArrowRightLine />
-            </Link>
-          </div>
         </div>
+      </div>
+      <div className="flex flex-wrap sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-center mt-10 mx-auto">
+        {products.map((product) => (
+          <Card key={product._id} product={product} />
+        ))}
       </div>
     </div>
   );

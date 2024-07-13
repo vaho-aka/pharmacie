@@ -43,10 +43,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex calc">
+    <div className="flex calc w-full">
       <div className="flex-1 flex justify-center items-center">
         <div className="w-full">
-          <h1 className="font-semibold text-[5vw] py-10 text-center">
+          <h1 className="font-semibold text-[2vw] py-10 text-center">
             Welcome back
           </h1>
           <form
@@ -140,17 +140,19 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <div className="bg-lime-500 justify-between py-20 flex-col flex-1 w-full hidden xl:flex rounded-3xl">
+      <div className="bg-lime-500 justify-between py-20 flex-col flex-1 w-full hidden xl:flex rounded-md">
         <div className="w-full">
-          <h1 className="text-lime-900 text-[8vw] font-bold text-center">
+          <h1 className="text-lime-900 text-[5vw] font-bold text-center">
             Pharmacy
           </h1>
         </div>
-        <h4 className="text-center w-[40vw] mx-auto">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, ipsam
-          ullam. Velit assumenda sint eligendi, dolorem dolore sed expedita ea
-          magni sequi quia ad est, quisquam pariatur consequatur quidem
-          provident!
+        <h4 className="text-center w-[25vw] mx-auto">
+          Your Health, Our Mission: Quality Care Delivered to Your Door.
+          Wellness Made Simple: Expert Care, Convenient Service, Trusted
+          Results. Empowering Your Health Journey: Professional Care at Your
+          Fingertips. Experience the convenience of modern healthcare without
+          compromising on quality. Your journey to better health starts here,
+          with us.
         </h4>
         <div className="justify-center flex items-center gap-10">
           <div className="flex gap-2 items-center">

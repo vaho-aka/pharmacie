@@ -7,7 +7,7 @@ const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
     <div className="w-full p-1 md:p-3">
       <Cart />
       <Navigation />
-      <div className="">{children}</div>
+      <div className="max-w-7xl mx-auto w-full">{children}</div>
     </div>
   );
 };

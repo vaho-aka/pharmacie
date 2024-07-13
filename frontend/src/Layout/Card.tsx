@@ -4,7 +4,7 @@ import { Item } from '../interfaces';
 
 const Card: React.FC<{ product: Item }> = ({ product }) => {
   return (
-    <figure className="bg-gray-200 w-[19rem] h-[500px] mx-auto rounded-xl flex flex-col p-1 relative">
+    <figure className="bg-gray-200 w-[19rem] h-[500px] mx-auto rounded-md flex flex-col p-1 relative">
       <Link
         className="flex-1 h-[250px] overflow-hidden"
         to={`/products/${product.categoryName}/${product._id}`}
@@ -22,12 +22,22 @@ const Card: React.FC<{ product: Item }> = ({ product }) => {
           <h1 className="text-lime-900 font-semibold">50% off</h1>
         </div>
       )}
-      <figcaption className="bg-white rounded-xl p-4 flex gap-2 flex-col justify-between mt-4">
+      <figcaption className="bg-white rounded-md p-4 flex gap-2 flex-col justify-between mt-4">
         <div className="flex flex-col gap-2">
-          <Link to={`/products/${product.categoryName}`}>
+          <Link
+            to={`/products/${product.categoryName
+              .split(' ')
+              .join('_')
+              .toLocaleLowerCase()}`}
+          >
             <h2 className="text-sm text-gray-500">{product.categoryName}</h2>
           </Link>
-          <Link to={`/products/${product.categoryName}/${product._id}`}>
+          <Link
+            to={`/products/${product.categoryName
+              .split(' ')
+              .join('_')
+              .toLocaleLowerCase()}/${product._id}`}
+          >
             <h1 className="font-semibold capitalize line-clamp-2 h-12">
               {product.name}
             </h1>
