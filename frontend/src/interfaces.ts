@@ -3,16 +3,17 @@ export interface User {
   name: string;
   email: string;
   isAdmin: boolean;
-  token: string;
 }
 
 export interface Item {
   _id: string;
   name: string;
   price: string;
-  brand: string;
   category: string;
   imageUrl: string;
+  countInStock: number;
+  createdAt: string;
+  onSale: boolean;
 }
 
 export interface ShippingAddressType {
@@ -28,6 +29,10 @@ export interface State {
   error: string;
 }
 
+export interface UserState extends State {
+  userLoggedIn: User;
+}
+
 export interface loginType {
   email: string;
   password: string;
@@ -35,4 +40,16 @@ export interface loginType {
 
 export interface registerType extends loginType {
   username: string;
+}
+
+export interface CartItem {
+  product: Item;
+  amount: number;
+}
+
+export interface CartState {
+  items: CartItem[];
+  shippingAddress: ShippingAddressType;
+  showCart: boolean;
+  totalAmount: number;
 }
