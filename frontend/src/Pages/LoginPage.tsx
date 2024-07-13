@@ -6,15 +6,15 @@ import {
   RiEyeLine,
   RiArchive2Line,
   RiCapsuleLine,
+  RiArrowRightLine,
 } from 'react-icons/ri';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm<loginType>();
 
@@ -42,10 +42,10 @@ const LoginPage = () => {
                 required
                 className="border p-2 focus:outline-none rounded h-12 bg-gray-50"
                 {...register('email', {
-                  required: 'adresse e-mail est obligatoire',
+                  required: 'Email is required',
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    message: 'Adresse e-mail invalide',
+                    message: 'Invalid email',
                   },
                 })}
               />
@@ -64,10 +64,10 @@ const LoginPage = () => {
                   type={!showPassword ? 'password' : 'text'}
                   className="focus:outline-none w-full bg-gray-50"
                   {...register('password', {
-                    required: 'Mot de passe obligatoir',
+                    required: 'Password is required',
                     minLength: {
                       value: 6,
-                      message: "Mot de passe doit être d'au moins 6 caractères",
+                      message: 'Password must be atleast 6 digits',
                     },
                   })}
                 />
@@ -101,6 +101,17 @@ const LoginPage = () => {
               Log in
             </button>
           </form>
+
+          <div className="flex justify-center py-10 gap-2 items-center">
+            <h1>Don't have an account yet?</h1>
+            <Link
+              to="/register"
+              className="text-lime-500 flex gap-1 items-center"
+            >
+              <span>Register here</span>
+              <RiArrowRightLine />
+            </Link>
+          </div>
         </div>
       </div>
       <div className="bg-lime-500 justify-between py-20 flex-col flex-1 w-full hidden xl:flex rounded-3xl">
@@ -109,13 +120,10 @@ const LoginPage = () => {
             Pharmacy
           </h1>
         </div>
-        <h4 className="text-center">
+        <h4 className="text-center w-[40vw] mx-auto">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, ipsam
-          <br />
           ullam. Velit assumenda sint eligendi, dolorem dolore sed expedita ea
-          <br />
           magni sequi quia ad est, quisquam pariatur consequatur quidem
-          <br />
           provident!
         </h4>
         <div className="justify-center flex items-center gap-10">
