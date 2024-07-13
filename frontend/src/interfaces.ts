@@ -12,6 +12,8 @@ export interface Item {
   name: string;
   price: string;
   categoryName: string;
+  categoryId: string;
+  desc: string;
   imageUrl: string;
   countInStock: number;
   createdAt: string;

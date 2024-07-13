@@ -28,7 +28,10 @@ export const getProductById =
     try {
       dispatch(productActions.GET_PRODUCT_REQUEST());
 
-      const { data } = await axios.get(`/api/v1/product/${id}`);
+      const { data } = await axios.get(
+        `http://localhost/pharmacie/backend/api/product/read_single.php?id=${id}`
+      );
+
       dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

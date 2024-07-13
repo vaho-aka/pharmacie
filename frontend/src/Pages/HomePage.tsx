@@ -12,10 +12,6 @@ const Home = () => {
     dispatch(getProducts());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(products);
-  });
-
   return (
     <div className="">
       <div className="bg-lime-500 flex flex-col justify-center w-full rounded-md">

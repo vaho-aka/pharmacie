@@ -7,8 +7,8 @@ const PrivateRoutes: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { userLoggedIn } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (!userLoggedIn.name) navigate('/');
-  }, [userLoggedIn]);
+    if (!userLoggedIn.username) navigate('/');
+  }, [userLoggedIn, navigate]);
 
   return <>{children}</>;
 };

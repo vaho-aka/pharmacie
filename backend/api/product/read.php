@@ -31,6 +31,7 @@ if ($num > 0) {
       '_id' => $medicine_id,
       'name' => $name,
       'price' => $price,
+      'desc' => trim($description),
       'imageUrl' => $image_url,
       'categoryId' => $category_id,
       'categoryName' => $category_name,
