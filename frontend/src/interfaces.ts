@@ -1,6 +1,7 @@
 export interface User {
-  _id: string;
-  name: string;
+  id: string;
+  username: string;
+  password: string;
   email: string;
   token: string;
   isAdmin: boolean;
@@ -10,7 +11,7 @@ export interface Item {
   _id: string;
   name: string;
   price: string;
-  category: string;
+  categoryName: string;
   imageUrl: string;
   countInStock: number;
   createdAt: string;
@@ -28,6 +29,12 @@ export interface ShippingAddressType {
 export interface State {
   loading: boolean;
   error: string;
+}
+
+export interface ProductState extends State {
+  products: Array<Item>;
+  product: Item;
+  message: string;
 }
 
 export interface UserState extends State {

@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { User, UserState } from '../interfaces';
 
-const userInfoFromStorage: User = localStorage.getItem('electroshop-user-info')
-  ? JSON.parse(localStorage.getItem('electroshop-user-info') || '')
+const userInfoFromStorage: User = localStorage.getItem('medicare-user-info')
+  ? JSON.parse(localStorage.getItem('medicare-user-info') || '')
   : {
-      _id: '',
-      name: '',
+      id: '',
+      username: '',
       email: '',
+      password: '',
       token: '',
       isAdmin: false,
     };
@@ -36,8 +37,9 @@ const userReducer = createSlice({
     USER_LOG_OUT(state) {
       state.loading = false;
       state.userLoggedIn = {
-        _id: '',
-        name: '',
+        id: '',
+        username: '',
+        password: '',
         email: '',
         isAdmin: false,
         token: '',

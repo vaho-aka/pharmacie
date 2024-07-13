@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { loginType } from '../interfaces';
 import {
   RiEyeOffLine,
@@ -7,19 +7,36 @@ import {
   RiArchive2Line,
   RiCapsuleLine,
   RiArrowRightLine,
+  RiErrorWarningLine,
 } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { login } from '../actions/userActions';
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
+  const { search } = useLocation();
+  const navigate = useNavigate();
+  const { userLoggedIn, error } = useAppSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm<loginType>();
 
-  // Redirecting the user to the command if they didn't login before uploading image
-  // const redirect = search ? search.split('=')[1] : '/';
+  //Redirecting the user to the command if they didn't login before uploading image
+  const redirect = search ? search.split('=')[1] : '/products';
+
+  useEffect(() => {
+    if (userLoggedIn.username) navigate(redirect);
+  }, [userLoggedIn, navigate, redirect]);
+
+  const submitHandler = (data: loginType) => {
+    dispatch(login(data.email, data.password));
+    // console.log(data);
+  };
 
   const showPasswordHandler = () => {
     setShowPassword((showPassword) => !showPassword);
@@ -32,7 +49,16 @@ const LoginPage = () => {
           <h1 className="font-semibold text-[5vw] py-10 text-center">
             Welcome back
           </h1>
-          <form className="max-w-[35rem] w-full mx-auto gap-4 flex flex-col">
+          <form
+            onSubmit={handleSubmit(submitHandler)}
+            className="max-w-[35rem] w-full mx-auto gap-4 flex flex-col"
+          >
+            {error && (
+              <div className="text-red-500 flex gap-2 my-2 bg-red-100 justify-center py-1">
+                <RiErrorWarningLine size={22} />
+                <span>{error}</span>
+              </div>
+            )}
             <div className="flex flex-col gap-2 mb-2">
               <label>Email</label>
               <input

@@ -1,7 +1,15 @@
 <?php
 // Headers
-header('Access-Control-Allow-Origin: *');
-header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Content-Type: application/json");
+
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+  http_response_code(204);
+  exit();
+}
 
 include_once '../../config/Database.php';
 include_once '../../models/User.php';
@@ -36,14 +44,11 @@ $user->password = $data['password'];
 if ($user->login()) {
   // Login successful
   echo json_encode([
-    'message' => 'Login successful',
-    'user' => [
-      'id' => $user->id,
-      'email' => $user->email,
-      'username' => $user->username,
-      'createdAt' => $user->created_at,
-      'isAdmin' => $user->is_admin,
-    ]
+    'id' => $user->id,
+    'email' => $user->email,
+    'username' => $user->username,
+    'createdAt' => $user->created_at,
+    'isAdmin' => $user->is_admin,
   ]);
 } else {
   // Login failed

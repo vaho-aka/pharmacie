@@ -17,10 +17,12 @@ const Home = () => {
         <div className="lg:px-16 flex-col flex md:flex-row">
           <div className="flex flex-col flex-1 lg:w-[45rem]">
             <h4 className="text-center lg:text-left pb-16 px-10 lg:px-0">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam,
-              ipsam ullam. Velit assumenda sint eligendi, dolorem dolore sed
-              expedita ea magni sequi quia ad est, quisquam pariatur consequatur
-              quidem provident!
+              Your Health, Our Mission: Quality Care Delivered to Your Door.
+              Wellness Made Simple: Expert Care, Convenient Service, Trusted
+              Results. Empowering Your Health Journey: Professional Care at Your
+              Fingertips. Experience the convenience of modern healthcare
+              without compromising on quality. Your journey to better health
+              starts here, with us.
             </h4>
             <div className="justify-center lg:justify-start flex-col md:flex-row flex lg:items-center lg:px-0 px-10 gap-10 pb-16">
               <div className="flex gap-2 items-center">

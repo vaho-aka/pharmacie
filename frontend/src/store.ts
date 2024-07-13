@@ -5,11 +5,13 @@ import { Action } from 'redux';
 // * @Reducers
 import cartReducer from './Reducers/cartReducer.ts';
 import userReducer from './Reducers/userReducer.ts';
+import productReducer from './Reducers/productReducer.ts';
 
 const store = configureStore({
   reducer: {
     cart: cartReducer,
     user: userReducer,
+    product: productReducer,
   },
   devTools: true,
 });

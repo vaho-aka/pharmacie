@@ -44,8 +44,8 @@ body {
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid #059669;
-  border-color: #059669 transparent #059669 transparent;
+  border: 6px solid #84cc16;
+  border-color: #84cc16 transparent #84cc16 transparent;
   animation: spinner 1.2s linear infinite;
 }
 

@@ -16,7 +16,7 @@ export const login =
       };
 
       const { data } = await axios.post<User>(
-        '/api/v1/user/login',
+        'http://localhost/pharmacie/backend/api/user/read_login.php',
         {
           email,
           password,
@@ -24,7 +24,7 @@ export const login =
         config
       );
       dispatch(userActions.GET_USER_SUCCESS(data));
-      localStorage.setItem('electroshop-user-info', JSON.stringify(data));
+      localStorage.setItem('medicare-user-info', JSON.stringify(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const message =
@@ -75,7 +75,7 @@ export const register =
         config
       );
       dispatch(userActions.GET_USER_SUCCESS(data));
-      localStorage.setItem('electroshop-user-info', JSON.stringify(data));
+      localStorage.setItem('medicare-user-info', JSON.stringify(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const message =

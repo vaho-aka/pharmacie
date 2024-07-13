@@ -18,7 +18,7 @@ const Cart = () => {
   };
 
   const clickHandler = () => {
-    const redirect = !userLoggedIn.name
+    const redirect = !userLoggedIn.username
       ? '/login?redirect=/shipping'
       : '/shipping';
 
@@ -38,7 +38,7 @@ const Cart = () => {
             <CartItem item={product} key={product._id} amount={amount} />
           ))
         ) : (
-          <div className="flex flex-col gap-2 items-center text-emerald-500">
+          <div className="flex flex-col gap-2 items-center text-lime-500">
             <RiEmotionHappyLine size={36} />
             <span>Commencer par visiter nos produits !</span>
           </div>
@@ -54,7 +54,7 @@ const Cart = () => {
         <button
           onClick={clickHandler}
           disabled={items.length > 0 ? false : true}
-          className="py-1 px-6 bg-emerald-600 rounded text-white disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300"
+          className="py-1 px-6 bg-lime-500 rounded text-lime-900 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300"
         >
           Commander
         </button>
