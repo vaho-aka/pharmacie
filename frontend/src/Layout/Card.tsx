@@ -7,7 +7,10 @@ const Card: React.FC<{ product: Item }> = ({ product }) => {
     <figure className="bg-gray-200 w-[19rem] h-[500px] mx-auto rounded-md flex flex-col p-1 relative">
       <Link
         className="flex-1 h-[250px] overflow-hidden"
-        to={`/products/${product.categoryName}/${product._id}`}
+        to={`/products/${product.categoryName
+          .split(' ')
+          .join('_')
+          .toLocaleLowerCase()}}/${product._id}`}
       >
         <div className="w-full h-full flex items-center justify-center">
           <img

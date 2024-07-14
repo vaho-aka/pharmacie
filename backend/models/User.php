@@ -21,33 +21,50 @@ class User
   // Get User
   public function login()
   {
-    // Create query
     $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
-
-    // Prepare statement
     $stmt = $this->conn->prepare($query);
-
-    // Bind email
     $stmt->bindParam(':email', $this->email);
-
-    // Execute query
     $stmt->execute();
 
-    // Fetch the row
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Check if user exists and verify password
-    if ($row) {
-      if ($this->password === $row['password']) {
+    if ($stmt->rowCount() == 1) {
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+      if (password_verify($this->password, $row['password'])) {
         $this->id = $row['user_id'];
-        $this->email = $row['email'];
         $this->username = $row['username'];
-        $this->is_admin = $row['is_admin'];
         $this->created_at = $row['created_at'];
+        $this->is_admin = $row['is_admin'];
+
         return true;
       }
-      // User not found or wrong password
-      return false;
     }
+
+    // Either email not found or password incorrect
+    return false;
+  }
+
+  // Create new user
+  public function sign_up()
+  {
+    // Search existed users if the email is already in use
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
+    $stmt = $this->conn->prepare($query);
+    // Bind email
+    $stmt->bindParam(':email', $this->email);
+    $stmt->execute();
+    // Fetch the row
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) return false;
+
+    // Hash the password
+    $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+
+    // Create INSERT query
+    $query = 'INSERT INTO ' . $this->table . ' (username, email, password) VALUES (:username, :email, :password)';
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':email', $this->email);
+    $stmt->bindParam(':username', $this->username);
+    $stmt->bindParam(':password', $hashedPassword);  // Use the hashed password
+    $stmt->execute();
+    return true;
   }
 }

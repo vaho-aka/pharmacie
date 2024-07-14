@@ -14,14 +14,14 @@ $db = $database->connect();
 $product = new Product($db);
 
 // GET Id
-$product->medicine_id = isset($_GET['id']) ? $_GET['id'] : die('The product doesn\'t exist');
+$product->product_id = isset($_GET['id']) ? $_GET['id'] : die('The product doesn\'t exist');
 
 // Get product
 $product->read_single();
 
 // Create an Array
 $product_arr = array(
-  '_id' => $product->medicine_id,
+  '_id' => $product->product_id,
   'categoryName' => $product->category_name,
   'categoryId' => $product->category_id,
   'craetedAt' => $product->created_at,

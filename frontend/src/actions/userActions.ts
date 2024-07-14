@@ -16,7 +16,7 @@ export const login =
       };
 
       const { data } = await axios.post<User>(
-        'http://localhost/pharmacie/backend/api/user/read_login.php',
+        'http://localhost/pharmacie/backend/api/user/log_in.php',
         {
           email,
           password,
@@ -66,7 +66,7 @@ export const register =
       };
 
       const { data } = await axios.post<User>(
-        '/api/v1/user/signup',
+        'http://localhost/pharmacie/backend/api/user/sign_up.php',
         {
           userName,
           email,

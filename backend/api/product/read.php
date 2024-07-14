@@ -28,7 +28,7 @@ if ($num > 0) {
     extract($row);
 
     $product_item = array(
-      '_id' => $medicine_id,
+      '_id' => $product_id,
       'name' => $name,
       'price' => $price,
       'desc' => trim($description),

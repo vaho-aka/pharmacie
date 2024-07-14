@@ -2,10 +2,10 @@
 class Product
 {
   private $conn;
-  private $table = 'medicines';
+  private $table = 'products';
 
   // Product Model Properties
-  public $medicine_id;
+  public $product_id;
   public $category_id;
   public $name;
   public $price;
@@ -31,7 +31,7 @@ class Product
     // Create query
     $query = 'SELECT 
       c.name as category_name,
-      p.medicine_id,
+      p.product_id,
       p.category_id,
       p.description,
       p.name,
@@ -53,6 +53,7 @@ class Product
     return $stmt;
   }
 
+  // GET Product by categories
   public function read_category()
   {
     // Create query
@@ -65,12 +66,13 @@ class Product
     // $stmt->bindParam('1', $this->cate);
   }
 
+  // GET Product by id
   public function read_single()
   {
     // Create query
     $query = 'SELECT 
       c.name as category_name,
-      m.medicine_id,
+      m.product_id,
       m.category_id,
       m.description,
       m.name,
@@ -81,14 +83,14 @@ class Product
       m.created_at
     FROM ' . $this->table . ' m
     LEFT JOIN categories c ON m.category_id = c.category_id
-    WHERE m.medicine_id = :id
+    WHERE m.product_id = :id
     LIMIT 0,1';
 
     // Prepare statement
     $stmt = $this->conn->prepare($query);
 
     // Bind category
-    $stmt->bindParam(':id', $this->medicine_id);
+    $stmt->bindParam(':id', $this->product_id);
 
     // Execute query
     $stmt->execute();
@@ -97,7 +99,7 @@ class Product
 
     // Check if the product exist
     if ($row) {
-      $this->medicine_id = $row['medicine_id'];
+      $this->product_id = $row['product_id'];
       $this->category_id = $row['category_id'];
       $this->name = $row['name'];
       $this->price = $row['price'];
@@ -112,7 +114,7 @@ class Product
       return true;
     }
 
-    // User not found or wrong password
+    // Product not found or wrong password
     return false;
   }
 }
