@@ -106,13 +106,74 @@ class User
     $stmt = $this->conn->prepare($query);
 
     // Clean data
-    $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+    $this->user_id = $this->user_id;
     $stmt->bindParam(':user_id', $this->user_id);
 
     // Execute query
     if ($stmt->execute()) {
       return true;
     }
+
+    return false;
+  }
+
+  // Read single user
+  public function read_single()
+  {
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE user_id = :user_id LIMIT 0,1';
+
+    $stmt = $this->conn->prepare($query);
+
+    $stmt->bindParam(':user_id', $this->user_id);
+
+    $stmt->execute();
+
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row) {
+      $this->username = $row['username'];
+      $this->email = $row['email'];
+      $this->is_admin = $row['is_admin'];
+      $this->created_at = $row['created_at'];
+      $this->password = $row['password'];
+
+      return true;
+    }
+
+    return false;
+  }
+
+  // Update user
+  public function update()
+  {
+    $query = 'UPDATE ' . $this->table . '
+                  SET username = :username,
+                      email = :email,
+                      password = :password,
+                      is_admin = :is_admin
+                  WHERE user_id = :user_id';
+
+    $stmt = $this->conn->prepare($query);
+
+    $this->username = $this->username;
+    $this->email = $this->email;
+    $this->password = $this->password;
+    $this->is_admin = $this->is_admin;
+    $this->user_id = $this->user_id;
+
+    $stmt->bindParam(':username', $this->username);
+    $stmt->bindParam(':email', $this->email);
+    $stmt->bindParam(':password', $this->password);
+    $stmt->bindParam(':is_admin', $this->is_admin);
+    $stmt->bindParam(':user_id', $this->user_id);
+
+    // Execute query
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
 
     return false;
   }

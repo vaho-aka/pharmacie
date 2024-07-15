@@ -15,7 +15,7 @@ const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <div className="flex gap-4">
       <AdminSideBar />
-      <div>{children}</div>
+      <div className="w-full">{children}</div>
     </div>
   );
 };

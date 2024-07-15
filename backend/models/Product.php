@@ -127,13 +127,13 @@ class Product
     $stmt = $this->conn->prepare($query);
 
     // Clean data
-    $this->name = htmlspecialchars(strip_tags($this->name));
-    $this->description = htmlspecialchars(strip_tags($this->description));
-    $this->price = htmlspecialchars(strip_tags($this->price));
-    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-    $this->on_sale = htmlspecialchars(strip_tags($this->on_sale));
-    $this->image_url = htmlspecialchars(strip_tags($this->image_url));
-    $this->count_in_stock = htmlspecialchars(strip_tags($this->count_in_stock));
+    $this->name = $this->name;
+    $this->description = $this->description;
+    $this->price = $this->price;
+    $this->category_id = $this->category_id;
+    $this->on_sale = $this->on_sale;
+    $this->image_url = $this->image_url;
+    $this->count_in_stock = $this->count_in_stock;
 
     $stmt->bindParam(
       ':name',
@@ -170,14 +170,14 @@ class Product
     $stmt = $this->conn->prepare($query);
 
     // Clean data
-    $this->name = htmlspecialchars(strip_tags($this->name));
-    $this->description = htmlspecialchars(strip_tags($this->description));
-    $this->price = htmlspecialchars(strip_tags($this->price));
-    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
-    $this->on_sale = htmlspecialchars(strip_tags($this->on_sale));
-    $this->image_url = htmlspecialchars(strip_tags($this->image_url));
-    $this->count_in_stock = htmlspecialchars(strip_tags($this->count_in_stock));
-    $this->product_id = htmlspecialchars(strip_tags($this->product_id));
+    $this->name = $this->name;
+    $this->description = $this->description;
+    $this->price = $this->price;
+    $this->category_id = $this->category_id;
+    $this->on_sale = $this->on_sale;
+    $this->image_url = $this->image_url;
+    $this->count_in_stock = $this->count_in_stock;
+    $this->product_id = $this->product_id;
 
     $stmt->bindParam(':name', $this->name);
     $stmt->bindParam(':description', $this->description);
@@ -203,7 +203,7 @@ class Product
     $query = 'DELETE FROM ' . $this->table . ' WHERE product_id = :product_id';
     $stmt = $this->conn->prepare($query);
 
-    $this->product_id = htmlspecialchars(strip_tags($this->product_id));
+    $this->product_id = $this->product_id;
 
     $stmt->bindParam(':product_id', $this->product_id);
 

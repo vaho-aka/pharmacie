@@ -18,7 +18,7 @@ export interface Item {
   imageUrl: string;
   countInStock: number;
   createdAt: string;
-  onSale: boolean;
+  onSale: number;
 }
 
 export interface ShippingAddressType {

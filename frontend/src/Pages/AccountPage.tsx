@@ -1,16 +1,94 @@
 import { RiCheckboxCircleFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { useEffect, useRef, useState } from 'react';
+import { updateUserProfile } from '../actions/userActions';
 
 const tableClasses =
   'bg-background px-2 grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-6 sm:grid-cols-5 grid-cols-3 items-center justify-between';
 
+const inputClasses =
+  'border bg-gray-50 p-2 focus:outline-none rounded h-12 sm:bg-gray-50 bg-white';
+
 const AccountPage = () => {
+  const dispatch = useAppDispatch();
+  const { userLoggedIn } = useAppSelector((state) => state.user);
+  const [isModifyed, setIsModifyed] = useState(false);
+  const [userName, setUserName] = useState(userLoggedIn.username);
+  const [email, setEmail] = useState(userLoggedIn.email);
+  const [password, setPassword] = useState('');
+  const inputFileRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (
+      userName !== userLoggedIn.username ||
+      email !== userLoggedIn.email ||
+      password
+    ) {
+      setIsModifyed(true);
+    } else setIsModifyed(false);
+  }, [password, userLoggedIn, userName, email]);
+
+  const modifyProfilHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    dispatch(
+      updateUserProfile(userLoggedIn.id, userName, email, password && password)
+    );
+
+    if (inputFileRef.current) {
+      inputFileRef.current.value = '';
+    }
+  };
+
   return (
-    <div className="flex flex-col lg:flex-row">
+    <div className="flex flex-col gap-4 lg:flex-row">
       <div className="max-w-[25rem] w-full">
         <h1 className="text-2xl border-l-8 font-semibold border-lime-500 px-4">
           User's profil
         </h1>
+        <form
+          className="w-full sm:border-2 sm:p-4 my-4 rounded-md sm:bg-white"
+          onSubmit={modifyProfilHandler}
+        >
+          <div className="flex flex-col gap-2 mb-2">
+            <label htmlFor="name">Nom d'utilisateur</label>
+            <input
+              type="text"
+              id="name"
+              value={userName}
+              className={inputClasses}
+              onChange={(e) => setUserName(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-2 mb-2">
+            <label htmlFor="email">Adresse email</label>
+            <input
+              type="email"
+              value={email}
+              id="email"
+              onChange={(e) => setEmail(e.target.value)}
+              className={inputClasses}
+            />
+          </div>
+          <div className="flex flex-col gap-2 mb-2">
+            <label htmlFor="password">Mot de passe</label>
+            <input
+              id="password"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="votre mot de passe"
+              type="password"
+              className={inputClasses}
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={!isModifyed ? true : false}
+            className="active:translate-y-1 disabled:bg-neutral-500 disabled:cursor-not-allowed disabled:text-white transition-all w-full py-2 bg-lime-500 rounded-md text-lime-900 font-semibold mt-4"
+          >
+            Méttre à jour mon profil
+          </button>
+        </form>
       </div>
       <div className="w-full">
         <h1 className="text-2xl border-l-8 border-lime-500 font-semibold px-4">

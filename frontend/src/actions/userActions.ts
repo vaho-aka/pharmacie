@@ -140,3 +140,33 @@ export const deleteUser =
       dispatch(userActions.GET_USER_FAIL(message));
     }
   };
+
+export const updateUserProfile =
+  (id: string, username: string, email: string, password?: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(userActions.GET_USER_REQUEST());
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put<User>(
+        `http://localhost/pharmacie/backend/api/user/update.php?id=${id}`,
+        { username, email, password },
+        config
+      );
+      dispatch(userActions.GET_USER_SUCCESS(data));
+      localStorage.setItem('medicare-user-info', JSON.stringify(data));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+
+      dispatch(userActions.GET_USER_FAIL(message));
+    }
+  };
