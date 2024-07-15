@@ -44,7 +44,6 @@ class Product
     LEFT JOIN categories c ON p.category_id = c.category_id
     ORDER BY p.created_at DESC';
 
-    // Prepare statement
     $stmt = $this->conn->prepare($query);
 
     // Execute query
@@ -86,13 +85,8 @@ class Product
     WHERE m.product_id = :id
     LIMIT 0,1';
 
-    // Prepare statement
     $stmt = $this->conn->prepare($query);
-
-    // Bind product
     $stmt->bindParam(':id', $this->product_id);
-
-    // Execute query
     $stmt->execute();
 
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -141,7 +135,6 @@ class Product
     $this->image_url = htmlspecialchars(strip_tags($this->image_url));
     $this->count_in_stock = htmlspecialchars(strip_tags($this->count_in_stock));
 
-    // Bind data
     $stmt->bindParam(
       ':name',
       $this->name
@@ -201,6 +194,27 @@ class Product
 
     // Print error if something goes wrong
     printf("Error: %s.\n", $stmt->error);
+    return false;
+  }
+
+  // Delete product
+  public function delete()
+  {
+    $query = 'DELETE FROM ' . $this->table . ' WHERE product_id = :product_id';
+    $stmt = $this->conn->prepare($query);
+
+    $this->product_id = htmlspecialchars(strip_tags($this->product_id));
+
+    $stmt->bindParam(':product_id', $this->product_id);
+
+    // Execute query
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
+
     return false;
   }
 }

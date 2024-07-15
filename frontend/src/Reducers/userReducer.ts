@@ -15,6 +15,7 @@ const userInfoFromStorage: User = localStorage.getItem('medicare-user-info')
 
 const initialState: UserState = {
   userLoggedIn: userInfoFromStorage,
+  users: [],
   loading: false,
   error: '',
 };
@@ -29,6 +30,11 @@ const userReducer = createSlice({
     GET_USER_SUCCESS(state, action: PayloadAction<User>) {
       state.loading = false;
       state.userLoggedIn = action.payload;
+      state.error = '';
+    },
+    GET_ALL_USERS(state, action: PayloadAction<User[]>) {
+      state.loading = false;
+      state.users = action.payload;
       state.error = '';
     },
     GET_USER_FAIL(state, action: PayloadAction<string>) {

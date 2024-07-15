@@ -86,3 +86,29 @@ export const register =
       dispatch(userActions.GET_USER_FAIL(message));
     }
   };
+
+export const getAllUsers = (): AppThunk => async (dispatch) => {
+  try {
+    dispatch(userActions.GET_USER_REQUEST());
+
+    const config = {
+      headers: {
+        'content-type': 'application/json',
+      },
+    };
+
+    const { data } = await axios.post<User[]>(
+      'http://localhost/pharmacie/backend/api/user/read.php',
+      config
+    );
+    dispatch(userActions.GET_ALL_USERS(data));
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    dispatch(userActions.GET_USER_FAIL(message));
+  }
+};

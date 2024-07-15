@@ -90,7 +90,7 @@ const MenuAccount = () => {
               </MenuItem>
               {+userLoggedIn.isAdmin === 1 && (
                 <MenuItem>
-                  <Link to="/admin" className={classesLink}>
+                  <Link to="/admin/user" className={classesLink}>
                     <RiFunctionLine />
                     <span>Administration</span>
                   </Link>

@@ -46,7 +46,6 @@ class User
   // Create new user
   public function sign_up()
   {
-    // Query search if users existed
     $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
     $stmt = $this->conn->prepare($query);
 
@@ -57,12 +56,9 @@ class User
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($row) return false;
 
-    // Hash the password
     $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
-
     // $query = 'INSERT INTO ' . $this->table . ' (username, email, password) VALUES (:username, :email, :password)';
     $query = "INSERT INTO " . $this->table . " (username, password, email) VALUES (:username, :password, :email)";
-
     $stmt = $this->conn->prepare($query);
 
     $stmt->bindParam(':username', $this->username);
@@ -74,13 +70,11 @@ class User
       // Get the last inserted ID
       $user_id = $this->conn->lastInsertId();
 
-      // Retrieve the newly created user information
       $query = 'SELECT * FROM ' . $this->table . ' WHERE user_id = :user_id';
       $stmt = $this->conn->prepare($query);
       $stmt->bindParam(':user_id', $user_id);
       $stmt->execute();
 
-      // Fetch the newly created user info
       $newUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
       $this->user_id = $newUser['user_id'];
@@ -93,6 +87,7 @@ class User
     return false;
   }
 
+  // Get all users
   public function read()
   {
     $query = 'SELECT * FROM ' . $this->table;

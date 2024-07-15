@@ -41,17 +41,14 @@ try {
 
   if ($result) {
     return json_encode([
-      'message' => 'Product Created Successfully',
-      'product' => [
-        '_id' => $product->product_id,
-        'name' => $product->name,
-        'description' => $product->description,
-        'price' => $product->price,
-        'categoryId' => $product->category_id,
-        'onSale' => $product->on_sale,
-        'imageUrl' => $product->image_url,
-        'countInStock' => $product->count_in_stock
-      ]
+      '_id' => $product->product_id,
+      'name' => $product->name,
+      'description' => $product->description,
+      'price' => $product->price,
+      'categoryId' => $product->category_id,
+      'onSale' => $product->on_sale,
+      'imageUrl' => $product->image_url,
+      'countInStock' => $product->count_in_stock
     ]);
   } else {
     throw new Exception('Product creation failed');

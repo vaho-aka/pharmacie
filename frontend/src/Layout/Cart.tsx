@@ -1,5 +1,5 @@
 import Modal from './Modal.jsx';
-import CartItem from './CartItem.jsx';
+import CartItem from './CartItem.js';
 import { cartActions } from '../Reducers/cartReducer.js';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks.js';

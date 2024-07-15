@@ -26,7 +26,7 @@ try {
         'id' => $user_id,
         'username' => $username,
         'email' => $email,
-        'createdAt' => $email,
+        'createdAt' => $created_at,
         'isAdmin' => $is_admin,
       );
 

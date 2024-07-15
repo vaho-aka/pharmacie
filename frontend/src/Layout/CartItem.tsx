@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { cartActions } from '../Reducers/cartReducer';
-import { Item } from '../interfaces';
+import { cartActions } from '../Reducers/cartReducer.js';
+import { Item } from '../interfaces.js';
 import { useAppDispatch } from '../hooks.js';
 import { RiSubtractLine, RiAddLine } from 'react-icons/ri';
 

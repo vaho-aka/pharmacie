@@ -2,6 +2,8 @@ import { Suspense, lazy } from 'react';
 import { Routes as Router, Route } from 'react-router-dom';
 import LoadingSpinner from '../Layout/LoadingSpinner';
 import PrivateRoutes from './PrivateRoutes';
+import AdminLayout from '../Layout/AdminLayout';
+import AdminRoutes from './AdminRoutes';
 
 const HomePage = lazy(() => import('../Pages/HomePage'));
 const LoginPage = lazy(() => import('../Pages/LoginPage'));
@@ -27,6 +29,14 @@ const Routes = () => {
         <Route
           path="/products/:categoryName/:productId"
           element={<ProductsPage />}
+        />
+        <Route
+          path="/admin/*"
+          element={
+            <AdminLayout>
+              <AdminRoutes />
+            </AdminLayout>
+          }
         />
       </Router>
     </Suspense>
