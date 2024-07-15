@@ -97,7 +97,7 @@ export const getAllUsers = (): AppThunk => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post<User[]>(
+    const { data } = await axios.get<User[]>(
       'http://localhost/pharmacie/backend/api/user/read.php',
       config
     );
@@ -112,3 +112,31 @@ export const getAllUsers = (): AppThunk => async (dispatch) => {
     dispatch(userActions.GET_USER_FAIL(message));
   }
 };
+
+export const deleteUser =
+  (id?: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(userActions.GET_USER_REQUEST());
+
+      const config = {
+        headers: {
+          'content-type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.delete<string>(
+        `http://localhost/pharmacie/backend/api/user/delete.php?id=${id}`,
+        config
+      );
+      dispatch(userActions.DELETE_USER_SUCCESS(data));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+
+      dispatch(userActions.GET_USER_FAIL(message));
+    }
+  };

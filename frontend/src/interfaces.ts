@@ -44,6 +44,7 @@ export interface ProductState extends State {
 export interface UserState extends State {
   userLoggedIn: User;
   users: User[];
+  message: string;
 }
 
 export interface loginType {
@@ -64,5 +65,6 @@ export interface CartState {
   items: CartItem[];
   shippingAddress: ShippingAddressType;
   showCart: boolean;
+  showModal: boolean;
   totalAmount: number;
 }

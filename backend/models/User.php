@@ -97,4 +97,23 @@ class User
 
     return $stmt;
   }
+
+  // Delete user
+  public function delete()
+  {
+    $query = 'DELETE FROM ' . $this->table . ' WHERE user_id = :user_id';
+
+    $stmt = $this->conn->prepare($query);
+
+    // Clean data
+    $this->user_id = htmlspecialchars(strip_tags($this->user_id));
+    $stmt->bindParam(':user_id', $this->user_id);
+
+    // Execute query
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    return false;
+  }
 }

@@ -13,6 +13,8 @@ const Cart = () => {
   );
   const { userLoggedIn } = useAppSelector((state) => state.user);
 
+  const formatter = new Intl.NumberFormat('de-DE');
+
   const showCartHandler = () => {
     dispatch(cartActions.SHOW_CART());
   };
@@ -30,7 +32,7 @@ const Cart = () => {
     <Modal showModal={showCart} onClose={showCartHandler}>
       <div className="flex gap-4 items-center justify-between border-b-2">
         <h3 className="text-xl">Prix total:</h3>
-        <span>{totalAmount} Ar</span>
+        <span>{formatter.format(totalAmount)} Ar</span>
       </div>
       <div className="my-4 p-1 overflow-y-scroll max-h-[20rem]">
         {items[0] ? (

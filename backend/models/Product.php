@@ -152,7 +152,7 @@ class Product
       return true;
     }
 
-    // Print error if something goes wrong
+    // Print error
     printf("Error: %s.\n", $stmt->error);
 
     return false;
@@ -192,7 +192,7 @@ class Product
       return true;
     }
 
-    // Print error if something goes wrong
+    // Print error
     printf("Error: %s.\n", $stmt->error);
     return false;
   }
@@ -212,7 +212,7 @@ class Product
       return true;
     }
 
-    // Print error if something goes wrong
+    // Print error
     printf("Error: %s.\n", $stmt->error);
 
     return false;

@@ -10,6 +10,23 @@ const tableClasses =
 const Admin = () => {
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.product);
+  // const [localProducts, setLocalProducts] = useState(products);
+
+  const formatter = new Intl.NumberFormat('de-DE');
+
+  useEffect(() => {
+    if (products.length === 0) {
+      dispatch(getProducts());
+    }
+    // setLocalProducts(products);
+  }, [dispatch, products]);
+
+  // const deleteProductHandler = (productId: string) => {
+  //   dispatch(deleteUser(userId));
+  //   setLocalProducts((prevProds) =>
+  //     prevProds.filter((prod) => prod._id !== productId)
+  //   );
+  // };
 
   useEffect(() => {
     dispatch(getProducts());
@@ -28,7 +45,7 @@ const Admin = () => {
             <span className="hidden md:block">ID</span>
             <span className="">Name</span>
             <span className="hidden md:block lg:hidden xl:block text-center">
-              Price
+              Price (Ar)
             </span>
             <span className="hidden sm:block text-center">Category</span>
             <span className="hidden md:block text-center">Count in stock</span>
@@ -40,9 +57,9 @@ const Admin = () => {
                 <span className="hidden md:block">{product._id}</span>
                 <span className="line-clamp-1">{product.name}</span>
                 <span className="hidden md:block text-center lg:hidden xl:block">
-                  {product.price}
+                  {formatter.format(+product.price)}
                 </span>
-                <span className="hidden sm:block text-center truncate">
+                <span className="hidden sm:block text-left truncate">
                   {product.categoryName}
                 </span>
                 <span className="hidden md:block text-center">

@@ -4,6 +4,7 @@ import LoadingSpinner from '../Layout/LoadingSpinner';
 import PrivateRoutes from './PrivateRoutes';
 import AdminLayout from '../Layout/AdminLayout';
 import AdminRoutes from './AdminRoutes';
+import AdminPrivateRoutes from './AdminPrivateRoutes';
 
 const HomePage = lazy(() => import('../Pages/HomePage'));
 const LoginPage = lazy(() => import('../Pages/LoginPage'));
@@ -33,9 +34,11 @@ const Routes = () => {
         <Route
           path="/admin/*"
           element={
-            <AdminLayout>
-              <AdminRoutes />
-            </AdminLayout>
+            <AdminPrivateRoutes>
+              <AdminLayout>
+                <AdminRoutes />
+              </AdminLayout>
+            </AdminPrivateRoutes>
           }
         />
       </Router>

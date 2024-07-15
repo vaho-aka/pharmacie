@@ -13,6 +13,7 @@ const cartFromStorage: CartState = localStorage.getItem('electroshop-user-cart')
         phoneNumber: '',
       },
       showCart: false,
+      showModal: false,
       totalAmount: 0,
     };
 
@@ -89,6 +90,9 @@ const cartReducer = createSlice({
     },
     SHOW_CART(state) {
       state.showCart = !state.showCart;
+    },
+    SHOW_MODAL(state) {
+      state.showModal = !state.showModal;
     },
     ADD_SHIPPING_ADDRESS(state, action: PayloadAction<ShippingAddressType>) {
       state.shippingAddress = action.payload;

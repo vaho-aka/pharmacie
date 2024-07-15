@@ -12,6 +12,8 @@ const ProductsPage = () => {
   const { product, catId } = useAppSelector((state) => state.product);
   const [itemNumber, setItemNumber] = useState(1);
 
+  const formatter = new Intl.NumberFormat('de-DE');
+
   useEffect(() => {
     dispatch(getProductById(productId, catId));
   }, [dispatch, productId, catId]);
@@ -55,7 +57,7 @@ const ProductsPage = () => {
         <div className="py-4 flex flex-col gap-4">
           <div className="flex gap-4 items-center">
             <h3 className="text-xl underline">Prix:</h3>
-            <span>{product.price} Ar</span>
+            <span>{formatter.format(+product.price)} Ar</span>
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="text-xl underline">description:</h3>

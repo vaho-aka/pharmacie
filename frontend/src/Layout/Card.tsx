@@ -7,6 +7,8 @@ import { cartActions } from '../Reducers/cartReducer';
 const Card: React.FC<{ product: Item }> = ({ product }) => {
   const dispatch = useAppDispatch();
 
+  const formatter = new Intl.NumberFormat('de-DE');
+
   const inscreaseItemNumber = () => {
     const item = { product: product, amount: 1 };
     dispatch(cartActions.ADD_ITEM(item));
@@ -63,7 +65,9 @@ const Card: React.FC<{ product: Item }> = ({ product }) => {
             <RiAddLine />
             <span>Add to cart</span>
           </button>
-          <h2 className="font-semibold">{product.price} Ar</h2>
+          <h2 className="font-semibold">
+            {formatter.format(+product.price)} Ar
+          </h2>
         </div>
       </figcaption>
     </figure>

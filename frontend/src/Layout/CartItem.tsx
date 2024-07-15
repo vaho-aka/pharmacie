@@ -11,6 +11,8 @@ const CartItem: React.FC<{ item: Item; amount: number }> = ({
   const dispatch = useAppDispatch();
   const [itemNumber, setItemNumber] = useState(amount);
 
+  const formatter = new Intl.NumberFormat('de-DE');
+
   const inscreaseItemNumber = () => {
     if (item.countInStock > itemNumber) {
       setItemNumber((itemNumber) => itemNumber + 1);
@@ -39,7 +41,7 @@ const CartItem: React.FC<{ item: Item; amount: number }> = ({
       </div>
       <div className="mx-4">
         <h3 className="line-clamp-1 max-w-96">{item.name}</h3>
-        <span>{item.price} Ar</span>
+        <span>{formatter.format(+item.price)} Ar</span>
       </div>
       <div className="flex flex-col sm:flex-row items-center gap-5 p-4 max-w-fit ml-auto">
         <button className="bg-gray-400 rounded" onClick={descreaseItemNumber}>
