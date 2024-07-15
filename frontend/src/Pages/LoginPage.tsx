@@ -27,7 +27,7 @@ const LoginPage = () => {
   } = useForm<loginType>();
 
   //Redirecting the user to the command if they didn't login before uploading image
-  const redirect = search ? search.split('=')[1] : '/products';
+  const redirect = search ? search.split('=')[1] : '/';
 
   useEffect(() => {
     if (userLoggedIn.username) navigate(redirect);

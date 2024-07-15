@@ -9,9 +9,9 @@ const ProductsPage = () => {
   const { product } = useAppSelector((state) => state.product);
 
   useEffect(() => {
-    console.log(productId);
+    console.log(productId, categoryName?.split('_').join(' '));
     dispatch(getProductById(productId, categoryName?.split('_').join(' ')));
-  }, [dispatch, productId]);
+  }, [dispatch, productId, categoryName]);
 
   useEffect(() => {
     console.log(product);
@@ -37,7 +37,7 @@ const ProductsPage = () => {
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="text-xl underline">description:</h3>
-            <span className="">{product.desc}</span>
+            <span className="">{product.description}</span>
           </div>
         </div>
       </div>

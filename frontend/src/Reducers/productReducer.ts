@@ -10,7 +10,7 @@ const initialState: ProductState = {
     categoryName: '',
     categoryId: '',
     countInStock: 0,
-    desc: '',
+    description: '',
     createdAt: '',
     imageUrl: '',
     onSale: false,

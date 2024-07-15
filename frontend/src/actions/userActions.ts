@@ -54,7 +54,7 @@ export const logout = (): AppThunk => async (dispatch) => {
 };
 
 export const register =
-  (userName: string, email: string, password: string): AppThunk =>
+  (username: string, email: string, password: string): AppThunk =>
   async (dispatch) => {
     try {
       dispatch(userActions.GET_USER_REQUEST());
@@ -68,7 +68,7 @@ export const register =
       const { data } = await axios.post<User>(
         'http://localhost/pharmacie/backend/api/user/sign_up.php',
         {
-          userName,
+          username,
           email,
           password,
         },

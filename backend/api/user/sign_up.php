@@ -1,5 +1,4 @@
 <?php
-
 require_once '../../middleware/ErrorMiddleware.php';
 require_once '../../config/Database.php';
 require_once '../../models/User.php';
@@ -26,8 +25,8 @@ try {
     throw new InvalidArgumentException('Invalid email format');
   }
 
-  // Validate password strength (you can adjust these requirements)
-  if (strlen($data['password']) < 8) {
+  // Validate password strength
+  if (strlen($data['password']) < 6) {
     throw new InvalidArgumentException('Password must be at least 8 characters long');
   }
 
@@ -41,10 +40,15 @@ try {
   $user->email = $data['email'];
   $user->password = $data['password'];
 
-  // Attempt to sign up the user
   if ($user->sign_up()) {
     http_response_code(201);
-    echo json_encode(['message' => 'User registered successfully']);
+    echo json_encode([
+      'id' => $user->user_id,
+      'email' => $user->email,
+      'username' => $user->username,
+      'createdAt' => $user->created_at,
+      'isAdmin' => $user->is_admin,
+    ]);
   } else {
     throw new InvalidArgumentException('Email already in use');
   }

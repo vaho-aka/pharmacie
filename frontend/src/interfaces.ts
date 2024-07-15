@@ -13,7 +13,7 @@ export interface Item {
   price: string;
   categoryName: string;
   categoryId: string;
-  desc: string;
+  description: string;
   imageUrl: string;
   countInStock: number;
   createdAt: string;

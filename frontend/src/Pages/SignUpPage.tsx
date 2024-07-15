@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { registerType } from '../interfaces';
 import {
   RiEyeOffLine,
@@ -8,18 +8,32 @@ import {
   RiCapsuleLine,
   RiArrowRightLine,
 } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { register } from './../actions/userActions';
 
 const SignUpPage = () => {
+  const { search } = useLocation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { userLoggedIn } = useAppSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
-    register,
+    register: regis,
+    handleSubmit,
     formState: { errors },
   } = useForm<registerType>();
 
-  // Redirecting the user to the command if they didn't login before uploading image
-  // const redirect = search ? search.split('=')[1] : '/';
+  const redirect = search ? search.split('=')[1] : '/';
+
+  useEffect(() => {
+    if (userLoggedIn.username) navigate(redirect);
+  }, [userLoggedIn, redirect, navigate]);
+
+  const submitHandler = (data: registerType) => {
+    dispatch(register(data.username, data.email, data.password));
+  };
 
   const showPasswordHandler = () => {
     setShowPassword((showPassword) => !showPassword);
@@ -32,25 +46,31 @@ const SignUpPage = () => {
           <h1 className="font-semibold text-[2vw] py-10 text-center">
             Create account
           </h1>
-          <form className="max-w-[35rem] w-full mx-auto gap-4 flex flex-col">
+          <form
+            onSubmit={handleSubmit(submitHandler)}
+            className="max-w-[35rem] w-full mx-auto gap-4 flex flex-col"
+          >
             <div className="flex flex-col gap-2 mb-2">
-              <label>Username</label>
+              <label htmlFor="name">Nom d'utilisateur</label>
               <input
+                autoFocus
                 type="text"
-                id="username"
-                placeholder="ex: vahoaka"
                 required
-                className="border p-2 focus:outline-none rounded h-12 bg-gray-50"
-                {...register('username', {
-                  required: 'Username is required',
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                    message: 'Invalid username',
+                id="name"
+                {...regis('username', {
+                  required: 'Username required',
+                  minLength: {
+                    value: 3,
+                    message:
+                      'Username must be atleast greater than 3 characters',
                   },
                 })}
+                className="border p-2 focus:outline-none rounded h-12"
               />
-              {errors.email && (
-                <p className="text-xs text-red-500">{errors.email.message}</p>
+              {errors.username && (
+                <p className="text-xs text-red-500">
+                  {errors.username.message}
+                </p>
               )}
             </div>
             <div className="flex flex-col gap-2 mb-2">
@@ -61,7 +81,7 @@ const SignUpPage = () => {
                 placeholder="your_email@example.com"
                 required
                 className="border p-2 focus:outline-none rounded h-12 bg-gray-50"
-                {...register('email', {
+                {...regis('email', {
                   required: 'Email is required',
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
@@ -83,7 +103,7 @@ const SignUpPage = () => {
                   placeholder="your password"
                   type={!showPassword ? 'password' : 'text'}
                   className="focus:outline-none w-full bg-gray-50"
-                  {...register('password', {
+                  {...regis('password', {
                     required: 'Password is required',
                     minLength: {
                       value: 6,

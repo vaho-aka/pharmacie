@@ -7,6 +7,7 @@ ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
 try {
+  // Get the JSON data from the request body
   $jsonData = file_get_contents('php://input');
   $data = json_decode($jsonData, true);
 
@@ -14,6 +15,7 @@ try {
     throw new InvalidArgumentException('Invalid JSON data');
   }
 
+  // Validate required fields
   if (!isset($data['email']) || !isset($data['password'])) {
     throw new InvalidArgumentException('Email and password are required');
   }
@@ -23,13 +25,14 @@ try {
 
   $user = new User($db);
 
+  // Set user properties
   $user->email = $data['email'];
   $user->password = $data['password'];
 
   $loginResult = $user->login();
-  if ($loginResult === true) {
+  if ($loginResult) {
     echo json_encode([
-      'id' => $user->id,
+      'id' => $user->user_id,
       'email' => $user->email,
       'username' => $user->username,
       'createdAt' => $user->created_at,

@@ -15,8 +15,8 @@ try {
 
   $id = $_GET['id'];
 
-  // Check if category_id is provided
-  $category_id = isset($_GET['category_name']) ? $_GET['category_name'] : null;
+  // Check if category_name is provided
+  $category_name = isset($_GET['category_name']) ? $_GET['category_name'] : null;
 
   $database = new Database();
   $db = $database->connect();
@@ -24,16 +24,14 @@ try {
   $product = new Product($db);
   $product->product_id = $id;
 
-  // Get product
   $result = $product->read_single();
 
   if ($result) {
     // Check if category_id matches, if provided
-    if ($category_id !== null && $product->category_name != ucfirst($category_name)) {
+    if ($category_name !== null && $product->category_name != ucfirst($category_name)) {
       throw new NotFoundException('Product not found.');
     }
 
-    // Create array
     $product_arr = array(
       'id' => $product->product_id,
       'name' => $product->name,

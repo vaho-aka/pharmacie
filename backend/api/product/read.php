@@ -1,53 +1,47 @@
 <?php
-// Headers
-header('Access-control-Allow-Origin: *');
-header('Content-Type: application/json');
+require_once '../../middleware/ErrorMiddleware.php';
+require_once '../../config/Database.php';
+require_once '../../models/Product.php';
 
-include_once '../../config/Database.php';
-include_once '../../models/Product.php';
+ErrorMiddleware::setHeaders();
+ErrorMiddleware::handleOptions();
 
-// Instantiate DB & connect 
-$database = new Database();
-$db = $database->connect();
+try {
+  $database = new Database();
+  $db = $database->connect();
 
-// Instantiate Product objet
-$product = new Product($db);
+  $product = new Product($db);
 
-// Product query
-$result = $product->read();
+  // Product query
+  $result = $product->read();
 
-// Get row count
-$num = $result->rowCount();
+  // Get row count
+  $num = $result->rowCount();
 
-// check if any Products
-if ($num > 0) {
-  // Product array
-  $prodcut_arr = array();
+  if ($num > 0) {
+    $product_arr = array();
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+      extract($row);
+      $product_item = array(
+        '_id' => $product_id,
+        'name' => $name,
+        'price' => $price,
+        'desc' => trim($description),
+        'imageUrl' => $image_url,
+        'categoryId' => $category_id,
+        'categoryName' => $category_name,
+        'onSale' => $on_sale,
+        'countInStock' => $count_in_stock,
+      );
 
-  while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-    extract($row);
+      $product_arr[] = $product_item;
+    }
 
-    $product_item = array(
-      '_id' => $product_id,
-      'name' => $name,
-      'price' => $price,
-      'desc' => trim($description),
-      'imageUrl' => $image_url,
-      'categoryId' => $category_id,
-      'categoryName' => $category_name,
-      'onSale' => $on_sale,
-      'countInStock' => $count_in_stock,
-    );
-
-    // Push to "data"
-    array_push($prodcut_arr, $product_item);
+    // Turn to JSON & output
+    echo json_encode($product_arr);
+  } else {
+    throw new NotFoundException('No Products Found');
   }
-
-  // Turn to JSON & output
-  echo json_encode($prodcut_arr);
-} else {
-  // No Posts
-  echo json_encode(
-    array('message' => 'No Posts Found')
-  );
+} catch (Exception $e) {
+  ErrorMiddleware::handleError($e);
 }
