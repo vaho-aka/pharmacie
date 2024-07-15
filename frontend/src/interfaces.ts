@@ -35,6 +35,7 @@ export interface State {
 
 export interface ProductState extends State {
   products: Array<Item>;
+  catId: string;
   product: Item;
   message: string;
 }

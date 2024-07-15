@@ -16,7 +16,7 @@ try {
   $id = $_GET['id'];
 
   // Check if category_name is provided
-  $category_name = isset($_GET['category_name']) ? $_GET['category_name'] : null;
+  $category_id = isset($_GET['category_id']) ? $_GET['category_id'] : null;
 
   $database = new Database();
   $db = $database->connect();
@@ -28,12 +28,12 @@ try {
 
   if ($result) {
     // Check if category_id matches, if provided
-    if ($category_name !== null && $product->category_name != ucfirst($category_name)) {
-      throw new NotFoundException('Product not found.');
-    }
+    // if ($category_id === null || $product->category_id != ucfirst($category_id)) {
+    //   throw new NotFoundException('Product not found.');
+    // }
 
     $product_arr = array(
-      'id' => $product->product_id,
+      '_id' => $product->product_id,
       'name' => $product->name,
       'description' => $product->description,
       'price' => $product->price,
@@ -41,7 +41,8 @@ try {
       'categoryMame' => $product->category_name,
       'onSale' => $product->on_sale,
       'createdAt' => $product->created_at,
-      'imageUrl' => $product->image_url
+      'imageUrl' => $product->image_url,
+      'countInStock' => $product->count_in_stock,
     );
 
     echo json_encode($product_arr);

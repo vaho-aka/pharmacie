@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItem, CartState, ShippingAddressType } from '../interfaces';
 
-const cartFromStorage: CartState = localStorage.getItem('medicare-user-cart')
-  ? JSON.parse(localStorage.getItem('medicare-user-cart') || '')
+const cartFromStorage: CartState = localStorage.getItem('electroshop-user-cart')
+  ? JSON.parse(localStorage.getItem('electroshop-user-cart') || '')
   : {
       items: [],
       shippingAddress: {

@@ -4,20 +4,20 @@ class ErrorMiddleware
   public static function handleError($e)
   {
     $statusCode = 500;
-    $errorMessage = 'Internal Server Error';
+    $errorMessage = $e ? $e->getMessage() : 'Internal Server Error';
 
     if ($e instanceof InvalidArgumentException) {
       $statusCode = 400;
       $errorMessage = $e->getMessage();
     } elseif ($e instanceof PDOException) {
       $statusCode = 503;
-      $errorMessage = 'Database error';
+      $errorMessage = $e ? $e->getMessage() : 'Database error';
     } elseif ($e instanceof UnauthorizedException) {
       $statusCode = 401;
-      $errorMessage = 'Unauthorized';
+      $errorMessage = $e ? $e->getMessage() : 'Unauthorized';
     } elseif ($e instanceof NotFoundException) {
       $statusCode = 404;
-      $errorMessage = 'Not Found';
+      $errorMessage = $e ? $e->getMessage() : 'Not found';
     }
 
     http_response_code($statusCode);

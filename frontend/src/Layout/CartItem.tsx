@@ -38,7 +38,7 @@ const CartItem: React.FC<{ item: Item; amount: number }> = ({
         />
       </div>
       <div className="mx-4">
-        <h3>{item.name}</h3>
+        <h3 className="line-clamp-1 max-w-96">{item.name}</h3>
         <span>{item.price} Ar</span>
       </div>
       <div className="flex flex-col sm:flex-row items-center gap-5 p-4 max-w-fit ml-auto">
@@ -47,7 +47,7 @@ const CartItem: React.FC<{ item: Item; amount: number }> = ({
         </button>
         <input
           type="number"
-          className="w-10 text-center focus:outline-none"
+          className="w-10 text-center focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           value={itemNumber}
           onChange={(e: React.FormEvent<HTMLInputElement>) =>
             setItemNumber(+e.currentTarget.value)

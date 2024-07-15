@@ -35,7 +35,11 @@ const Cart = () => {
       <div className="my-4 p-1 overflow-y-scroll max-h-[20rem]">
         {items[0] ? (
           items.map(({ product, amount }) => (
-            <CartItem item={product} key={product._id} amount={amount} />
+            <CartItem
+              item={product}
+              key={product._id + amount}
+              amount={amount}
+            />
           ))
         ) : (
           <div className="flex flex-col gap-2 items-center text-lime-500">

@@ -22,6 +22,7 @@ try {
     $product_arr = array();
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
+
       $product_item = array(
         '_id' => $product_id,
         'name' => $name,

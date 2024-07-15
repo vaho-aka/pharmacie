@@ -1,8 +1,17 @@
+// import { useEffect } from 'react';
 import { RiAddLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { Item } from '../interfaces';
+// import { useAppDispatch } from '../hooks';
+// import { productActions } from '../Reducers/productReducer';
 
 const Card: React.FC<{ product: Item }> = ({ product }) => {
+  // const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   dispatch(productActions.ADD_CAT_ID(product.categoryId));
+  // }, [product, dispatch]);
+
   return (
     <figure className="bg-gray-200 w-[19rem] h-[500px] mx-auto rounded-md flex flex-col p-1 relative">
       <Link

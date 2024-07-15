@@ -3,6 +3,7 @@ import { ProductState, Item } from '../interfaces';
 
 const initialState: ProductState = {
   products: [],
+  catId: '',
   product: {
     _id: '',
     name: '',
@@ -36,6 +37,9 @@ const productReducer = createSlice({
       state.loading = false;
       state.product = action.payload;
       state.error = '';
+    },
+    ADD_CAT_ID(state, action: PayloadAction<string>) {
+      state.catId = action.payload;
     },
     GET_PRODUCT_FAIL(state, action: PayloadAction<string>) {
       state.loading = false;
