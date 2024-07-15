@@ -56,7 +56,7 @@ const Card: React.FC<{ product: Item }> = ({ product }) => {
           </Link>
         </div>
         <div className="flex items-center justify-between">
-          <button className="border border-neutral-800 px-3 py-1 flex items-center gap-2 rounded-full">
+          <button className="border border-neutral-800 hover:bg-neutral-800 hover:text-white transition-colors px-3 py-1 flex items-center gap-2 rounded-full">
             <RiAddLine />
             <span>Add to cart</span>
           </button>

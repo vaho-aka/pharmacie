@@ -7,7 +7,7 @@ const Backdrop: React.FC<{ showModal: boolean }> = ({ showModal }) => {
     <Transition
       show={showModal}
       as="div"
-      className="fixed top-0 left-0 bg-[#030712bf] h-full w-full z-10"
+      className="fixed top-0 left-0 bg-[#030712bf] h-full w-full z-50"
     ></Transition>
   );
 };
@@ -58,7 +58,7 @@ const ModalOverlay: React.FC<{
       leave="transition duration-100 ease-out"
       leaveFrom="translate-y-0 opacity-100"
       leaveTo="-translate-y-12 opacity-0"
-      className="fixed top-0 left-0 bg-transparent flex items-center justify-center h-full w-full z-20"
+      className="fixed top-0 left-0 bg-transparent flex items-center justify-center h-full w-full z-50"
     >
       <div ref={modalRef} className="p-4 rounded-md bg-white sm:min-w-[500px]">
         {children}

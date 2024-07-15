@@ -20,8 +20,10 @@
   font-weight: 400;
 }
 
-body {
-  font-family: 'Montserrat';
+html {
+  font-family: 'Montserrat', sans-serif;
+  padding: 0 !important;
+  overflow: visible !important;
 }
 
 .container {

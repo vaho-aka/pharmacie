@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { cartActions } from '../Reducers/cartReducer';
 import { useEffect, useState } from 'react';
+import MenuAccount from './MenuAccount';
 
 const Navigation = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +41,7 @@ const Navigation = () => {
               </div>
             </button>
           </li>
-          {showLogin && (
+          {showLogin ? (
             <li className="">
               <Link
                 to="/login"
@@ -49,6 +50,8 @@ const Navigation = () => {
                 <span>Login</span>
               </Link>
             </li>
+          ) : (
+            <MenuAccount />
           )}
         </ul>
       </div>
