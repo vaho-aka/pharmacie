@@ -57,7 +57,7 @@ class Product
   public function read_category()
   {
     // Create query
-    $query = 'SELECT DISTINCT c.* FROM categories c INNER JOIN ' . $this->table . ' m ON c.category_id = m.category_id WHERE c.name = ?';
+    $query = 'SELECT * FROM ' . $this->table . ' WHERE category_id ';
 
     // Prepare statement
     $stmt = $this->conn->prepare($query);
@@ -89,7 +89,7 @@ class Product
     // Prepare statement
     $stmt = $this->conn->prepare($query);
 
-    // Bind category
+    // Bind product
     $stmt->bindParam(':id', $this->product_id);
 
     // Execute query
@@ -115,6 +115,92 @@ class Product
     }
 
     // Product not found or wrong password
+    return false;
+  }
+
+  // Create new product
+  public function create()
+  {
+    $query = 'INSERT INTO ' . $this->table . ' 
+              SET name = :name, 
+                  description = :description, 
+                  price = :price, 
+                  category_id = :category_id, 
+                  on_sale = :on_sale, 
+                  image_url = :image_url, 
+                  count_in_stock = :count_in_stock';
+
+    $stmt = $this->conn->prepare($query);
+
+    // Clean data
+    $this->name = htmlspecialchars(strip_tags($this->name));
+    $this->description = htmlspecialchars(strip_tags($this->description));
+    $this->price = htmlspecialchars(strip_tags($this->price));
+    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+    $this->on_sale = htmlspecialchars(strip_tags($this->on_sale));
+    $this->image_url = htmlspecialchars(strip_tags($this->image_url));
+    $this->count_in_stock = htmlspecialchars(strip_tags($this->count_in_stock));
+
+    // Bind data
+    $stmt->bindParam(
+      ':name',
+      $this->name
+    );
+    $stmt->bindParam(':description', $this->description);
+    $stmt->bindParam(':price', $this->price);
+    $stmt->bindParam(':category_id', $this->category_id);
+    $stmt->bindParam(':on_sale', $this->on_sale, PDO::PARAM_BOOL);
+    $stmt->bindParam(':image_url', $this->image_url);
+    $stmt->bindParam(':count_in_stock', $this->count_in_stock);
+
+    // Execute query
+    if ($stmt->execute()) {
+      $this->product_id = $this->conn->lastInsertId();
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
+
+    return false;
+  }
+
+  // Update product
+  public function update()
+  {
+    $query = 'UPDATE ' . $this->table . '
+              SET name = :name, description = :description, price = :price, 
+                  category_id = :category_id, on_sale = :on_sale, 
+                  image_url = :image_url, count_in_stock = :count_in_stock
+              WHERE product_id = :product_id';
+
+    $stmt = $this->conn->prepare($query);
+
+    // Clean data
+    $this->name = htmlspecialchars(strip_tags($this->name));
+    $this->description = htmlspecialchars(strip_tags($this->description));
+    $this->price = htmlspecialchars(strip_tags($this->price));
+    $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+    $this->on_sale = htmlspecialchars(strip_tags($this->on_sale));
+    $this->image_url = htmlspecialchars(strip_tags($this->image_url));
+    $this->count_in_stock = htmlspecialchars(strip_tags($this->count_in_stock));
+    $this->product_id = htmlspecialchars(strip_tags($this->product_id));
+
+    $stmt->bindParam(':name', $this->name);
+    $stmt->bindParam(':description', $this->description);
+    $stmt->bindParam(':price', $this->price);
+    $stmt->bindParam(':category_id', $this->category_id);
+    $stmt->bindParam(':on_sale', $this->on_sale);
+    $stmt->bindParam(':image_url', $this->image_url);
+    $stmt->bindParam(':count_in_stock', $this->count_in_stock);
+    $stmt->bindParam(':product_id', $this->product_id);
+
+    if ($stmt->execute()) {
+      return true;
+    }
+
+    // Print error if something goes wrong
+    printf("Error: %s.\n", $stmt->error);
     return false;
   }
 }

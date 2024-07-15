@@ -33,7 +33,6 @@ const cartReducer = createSlice({
 
       if (!existItem) {
         state.totalAmount += price * action.payload.amount;
-        console.log(state.totalAmount);
         state.items = [...state.items, action.payload];
       } else {
         state.totalAmount -= price * existItem.amount;

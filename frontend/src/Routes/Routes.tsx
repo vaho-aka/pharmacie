@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { Routes as Router, Route } from 'react-router-dom';
 import LoadingSpinner from '../Layout/LoadingSpinner';
+import PrivateRoutes from './PrivateRoutes';
 
 const HomePage = lazy(() => import('../Pages/HomePage'));
 const LoginPage = lazy(() => import('../Pages/LoginPage'));
@@ -15,7 +16,14 @@ const Routes = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignUpPage />} />
-        <Route path="/account/:id" element={<AccountPage />} />
+        <Route
+          path="/account/:id"
+          element={
+            <PrivateRoutes>
+              <AccountPage />
+            </PrivateRoutes>
+          }
+        />
         <Route
           path="/products/:categoryName/:productId"
           element={<ProductsPage />}

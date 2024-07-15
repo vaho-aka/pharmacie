@@ -15,9 +15,7 @@ try {
   // Product query
   $result = $product->read();
 
-  // Get row count
   $num = $result->rowCount();
-
   if ($num > 0) {
     $product_arr = array();
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {

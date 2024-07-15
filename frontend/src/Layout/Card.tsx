@@ -1,16 +1,16 @@
-// import { useEffect } from 'react';
 import { RiAddLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { Item } from '../interfaces';
-// import { useAppDispatch } from '../hooks';
-// import { productActions } from '../Reducers/productReducer';
+import { useAppDispatch } from '../hooks';
+import { cartActions } from '../Reducers/cartReducer';
 
 const Card: React.FC<{ product: Item }> = ({ product }) => {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(productActions.ADD_CAT_ID(product.categoryId));
-  // }, [product, dispatch]);
+  const inscreaseItemNumber = () => {
+    const item = { product: product, amount: 1 };
+    dispatch(cartActions.ADD_ITEM(item));
+  };
 
   return (
     <figure className="bg-gray-200 w-[19rem] h-[500px] mx-auto rounded-md flex flex-col p-1 relative">
@@ -56,7 +56,10 @@ const Card: React.FC<{ product: Item }> = ({ product }) => {
           </Link>
         </div>
         <div className="flex items-center justify-between">
-          <button className="border border-neutral-800 hover:bg-neutral-800 hover:text-white transition-colors px-3 py-1 flex items-center gap-2 rounded-full">
+          <button
+            onClick={inscreaseItemNumber}
+            className="border border-neutral-800 active:translate-y-1 hover:bg-neutral-800 hover:text-white transition-all px-3 py-1 flex items-center gap-2 rounded-full"
+          >
             <RiAddLine />
             <span>Add to cart</span>
           </button>

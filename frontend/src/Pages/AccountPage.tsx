@@ -6,7 +6,7 @@ const tableClasses =
 
 const AccountPage = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col lg:flex-row">
       <div className="max-w-[25rem] w-full">
         <h1 className="text-2xl border-l-8 font-semibold border-lime-500 px-4">
           User's profil

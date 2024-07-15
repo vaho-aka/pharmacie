@@ -8,6 +8,7 @@ const userInfoFromStorage: User = localStorage.getItem('medicare-user-info')
       username: '',
       email: '',
       password: '',
+      createdAt: '',
       token: '',
       isAdmin: false,
     };
@@ -39,6 +40,7 @@ const userReducer = createSlice({
       state.userLoggedIn = {
         id: '',
         username: '',
+        createdAt: '',
         password: '',
         email: '',
         isAdmin: false,
