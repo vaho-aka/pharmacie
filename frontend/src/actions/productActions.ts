@@ -23,13 +23,13 @@ export const getProducts = (): AppThunk => async (dispatch) => {
 };
 
 export const getProductById =
-  (id?: string): AppThunk =>
+  (id?: string, category_name?: string): AppThunk =>
   async (dispatch) => {
     try {
       dispatch(productActions.GET_PRODUCT_REQUEST());
 
       const { data } = await axios.get(
-        `http://localhost/pharmacie/backend/api/product/read_single.php?id=${id}`
+        `http://localhost/pharmacie/backend/api/product/read_single.php?id=${id}&category_id=${category_name}`
       );
 
       dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));

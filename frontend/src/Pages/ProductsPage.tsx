@@ -4,13 +4,13 @@ import { getProductById } from '../actions/productActions';
 import { useParams } from 'react-router-dom';
 
 const ProductsPage = () => {
-  const { productId } = useParams();
+  const { productId, categoryName } = useParams();
   const dispatch = useAppDispatch();
   const { product } = useAppSelector((state) => state.product);
 
   useEffect(() => {
     console.log(productId);
-    dispatch(getProductById(productId));
+    dispatch(getProductById(productId, categoryName?.split('_').join(' ')));
   }, [dispatch, productId]);
 
   useEffect(() => {
