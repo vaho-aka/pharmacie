@@ -140,7 +140,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-      <div className="bg-lime-500 justify-between py-20 flex-col flex-1 w-full hidden xl:flex rounded-md">
+      <div className="bg-lime-500 justify-between py-10 2xl:py-20 flex-col flex-1 w-full hidden xl:flex rounded-md">
         <div className="w-full">
           <h1 className="text-lime-900 text-[5vw] font-bold text-center">
             Pharmacy

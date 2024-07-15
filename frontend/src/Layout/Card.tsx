@@ -10,7 +10,7 @@ const Card: React.FC<{ product: Item }> = ({ product }) => {
         to={`/products/${product.categoryName
           .split(' ')
           .join('_')
-          .toLocaleLowerCase()}}/${product._id}`}
+          .toLocaleLowerCase()}/${product._id}`}
       >
         <div className="w-full h-full flex items-center justify-center">
           <img
