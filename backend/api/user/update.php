@@ -9,7 +9,7 @@ ErrorMiddleware::handleOptions();
 
 try {
   // Check if it's a UPDATE request
-  if ($_SERVER['REQUEST_METHOD'] !== 'UPDATE') {
+  if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     throw new InvalidArgumentException('Only UPDATE requests are allowed');
   }
 

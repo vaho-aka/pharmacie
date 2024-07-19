@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { getProducts } from '../actions/productActions';
 import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { productActions } from '../Reducers/productReducer';
+import { Item } from '../interfaces';
 
 const tableClasses =
   'bg-background px-2 grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-6 sm:grid-cols-5 grid-cols-3 items-center justify-between';
@@ -31,6 +33,10 @@ const Admin = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
+  const editProductHandler = (product: Item) => {
+    dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(product));
+  };
 
   return (
     <div className="p-4">
@@ -66,7 +72,10 @@ const Admin = () => {
                   {product.countInStock}
                 </span>
                 <div className="flex gap-1 justify-end">
-                  <Link to={`/admin/product/edit/${product._id}`}>
+                  <Link
+                    onClick={editProductHandler.bind(null, product)}
+                    to={`/admin/product/edit/${product._id}`}
+                  >
                     <RiEditLine size={24} />
                   </Link>
                   <button className="text-red-600">

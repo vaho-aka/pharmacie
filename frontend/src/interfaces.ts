@@ -44,6 +44,7 @@ export interface ProductState extends State {
 export interface UserState extends State {
   userLoggedIn: User;
   users: User[];
+  user: User;
   message: string;
 }
 

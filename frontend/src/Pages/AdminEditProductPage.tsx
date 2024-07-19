@@ -3,26 +3,38 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { getProductById } from '../actions/productActions';
 import { useParams } from 'react-router-dom';
 import { Switch } from '@headlessui/react';
+import LoadingSpinner from '../Layout/LoadingSpinner';
 
 const AdminEditProductPage = () => {
   const { productId } = useParams();
   const dispatch = useAppDispatch();
-  const { product } = useAppSelector((state) => state.product);
-  const [localProduct, setLocalProduct] = useState(product);
-  const [productName, setProductName] = useState(localProduct.name);
-  const [desc, setDesc] = useState(localProduct.description);
-  const [catId, setCatId] = useState(localProduct.categoryId);
-  const [price, setPrice] = useState(localProduct.price);
-  const [count, setCount] = useState(localProduct.countInStock);
-  const [enabled, setEnabled] = useState(
-    +localProduct.onSale === 1 ? true : false
-  );
+  const { product, loading, error } = useAppSelector((state) => state.product);
+  const [productName, setProductName] = useState('');
+  const [desc, setDesc] = useState('');
+  const [price, setPrice] = useState(product.price);
+  const [count, setCount] = useState(0);
+  const [enabled, setEnabled] = useState(+product.onSale !== 1 ? false : true);
 
   useEffect(() => {
     dispatch(getProductById(productId));
+  }, [productId, dispatch]);
 
-    setLocalProduct(product);
-  }, [productId, dispatch, product]);
+  useEffect(() => {
+    if (!loading && product) {
+      setProductName(product.name || '');
+      setDesc(product.description || '');
+      setPrice(product.price || '');
+      setCount(product.countInStock || 0);
+    }
+  }, [product, loading]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <form className="flex gap-4 w-full lg:flex-row flex-col">
@@ -67,7 +79,7 @@ const AdminEditProductPage = () => {
             id="count"
             value={count}
             className="border-2 px-4 py-2 focus:outline-none rounded-md"
-            onChange={(e) => setCount(+e.target.value)}
+            onChange={(e) => setCount(Number(e.target.value))}
           />
         </div>
         <div className="flex flex-col gap-2">

@@ -153,13 +153,51 @@ export const updateUserProfile =
         },
       };
 
+      console.log(
+        'Request URL:',
+        `http://localhost/pharmacie/backend/api/user/update.php?id=${id}`
+      );
+      console.log(
+        'Request Body:',
+        JSON.stringify({ username, email, password })
+      );
+      console.log('Request Headers:', config.headers);
+
       const { data } = await axios.put<User>(
         `http://localhost/pharmacie/backend/api/user/update.php?id=${id}`,
-        { username, email, password },
+        JSON.stringify({ username, email, password }),
         config
       );
       dispatch(userActions.GET_USER_SUCCESS(data));
       localStorage.setItem('medicare-user-info', JSON.stringify(data));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+
+      dispatch(userActions.GET_USER_FAIL(message));
+    }
+  };
+
+export const getUserById =
+  (id?: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(userActions.GET_USER_REQUEST());
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.get<User>(
+        `http://localhost/pharmacie/backend/api/user/read_single.php?id=${id}`,
+        config
+      );
+      dispatch(userActions.GET_USER_BY_ID(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const message =

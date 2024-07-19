@@ -9,7 +9,7 @@ ErrorMiddleware::handleOptions();
 
 try {
   // Check if it's a UPDATE request
-  if ($_SERVER['REQUEST_METHOD'] !== 'UPDATE') {
+  if ($_SERVER['REQUEST_METHOD'] !== 'PUT') {
     throw new InvalidArgumentException('Only UPDATE requests are allowed');
   }
 
@@ -21,6 +21,7 @@ try {
   if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
     throw new InvalidArgumentException('Invalid JSON data');
   }
+
   // Check if ID is set in the URL
   if (!isset($_GET['id'])) {
     throw new InvalidArgumentException('Product ID is required');
