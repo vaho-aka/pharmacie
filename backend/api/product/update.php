@@ -8,15 +8,11 @@ ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
 try {
-<<<<<<< HEAD
-  $_SERVER['REQUEST_METHOD'] === 'PUT';
-=======
   // Check if it's a UPDATE request
   if ($_SERVER['REQUEST_METHOD'] !== 'UPDATE') {
     throw new InvalidArgumentException('Only UPDATE requests are allowed');
   }
 
->>>>>>> afd2b72607f1757170ecaf237c6e386c8315984e
 
   // Get the JSON data from the request body
   $jsonData = file_get_contents('php://input');

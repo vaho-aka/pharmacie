@@ -8,15 +8,11 @@ ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
 try {
-<<<<<<< HEAD
-  $_SERVER['REQUEST_METHOD'] === 'GET';
-=======
   // Check if it's a GET request
   if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     throw new InvalidArgumentException('Only GET requests are allowed');
   }
 
->>>>>>> afd2b72607f1757170ecaf237c6e386c8315984e
 
   $database = new Database();
   $db = $database->connect();
