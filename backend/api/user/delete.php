@@ -8,20 +8,33 @@ ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
 try {
+<<<<<<< HEAD
   $_SERVER['REQUEST_METHOD'] === 'DELETE';
 
   // Check if ID is set in the URL
   if (!isset($_GET['id'])) {
+=======
+  // Check if it's a DELETE request
+  if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+    throw new InvalidArgumentException('Only DELETE requests are allowed');
+  }
+
+  // Get the raw DELETE data
+  $rawData = file_get_contents("php://input");
+  $data = json_decode($rawData, true);
+
+  // Check if user_id is set in the JSON data
+  if (!isset($data['user_id'])) {
+>>>>>>> afd2b72607f1757170ecaf237c6e386c8315984e
     throw new InvalidArgumentException('User ID is required');
   }
 
-  $id = $_GET['id'];
+  $id = $data['user_id'];
 
   $database = new Database();
   $db = $database->connect();
 
   $user = new User($db);
-
   $user->user_id = $id;
 
   // Delete user

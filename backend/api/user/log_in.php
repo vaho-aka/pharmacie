@@ -9,6 +9,14 @@ ErrorMiddleware::handleOptions();
 $_SERVER['REQUEST_METHOD'] === 'POST';
 
 try {
+<<<<<<< HEAD
+=======
+  // Check if it's a DELETE request
+  if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    throw new InvalidArgumentException('Only POST requests are allowed');
+  }
+
+>>>>>>> afd2b72607f1757170ecaf237c6e386c8315984e
 
   // Get the JSON data from the request body
   $jsonData = file_get_contents('php://input');

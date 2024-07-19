@@ -6,6 +6,12 @@ require_once '../../models/Product.php';
 ErrorMiddleware::setHeaders();
 
 try {
+  // Check if it's a POST request
+  if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    throw new InvalidArgumentException('Only POST requests are allowed');
+  }
+
+
   // Get the JSON data from the request body
   $jsonData = file_get_contents('php://input');
   $data = json_decode($jsonData, true);
