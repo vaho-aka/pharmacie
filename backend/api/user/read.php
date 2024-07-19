@@ -4,10 +4,13 @@ require_once '../../middleware/ErrorMiddleware.php';
 require_once '../../config/Database.php';
 require_once '../../models/User.php';
 
+
 ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
 try {
+  $_SERVER['REQUEST_METHOD'] === 'GET';
+
   $database = new Database();
   $db = $database->connect();
 

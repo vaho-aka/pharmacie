@@ -40,7 +40,7 @@ export const logout = (): AppThunk => async (dispatch) => {
   try {
     dispatch(userActions.GET_USER_REQUEST());
 
-    await axios.get('/api/v1/user/logout');
+    // await axios.get('/api/v1/user/logout');
     dispatch(userActions.USER_LOG_OUT());
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {

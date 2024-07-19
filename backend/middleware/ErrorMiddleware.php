@@ -27,11 +27,12 @@ class ErrorMiddleware
 
   public static function setHeaders()
   {
-    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Origin: http://localhost:4000");
     header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
     header("Access-Control-Allow-Headers: Content-Type, Authorization");
     header("Content-Type: application/json");
   }
+
 
   public static function handleOptions()
   {

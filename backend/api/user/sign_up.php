@@ -3,10 +3,13 @@ require_once '../../middleware/ErrorMiddleware.php';
 require_once '../../config/Database.php';
 require_once '../../models/User.php';
 
+
 ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
 try {
+  $_SERVER['REQUEST_METHOD'] === 'POST';
+
   // Get the JSON data from the request body
   $jsonData = file_get_contents('php://input');
   $data = json_decode($jsonData, true);

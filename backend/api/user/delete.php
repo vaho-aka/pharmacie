@@ -3,10 +3,13 @@ require_once '../../middleware/ErrorMiddleware.php';
 require_once '../../config/Database.php';
 require_once '../../models/User.php';
 
+
 ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
 try {
+  $_SERVER['REQUEST_METHOD'] === 'DELETE';
+
   // Check if ID is set in the URL
   if (!isset($_GET['id'])) {
     throw new InvalidArgumentException('User ID is required');

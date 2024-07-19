@@ -54,7 +54,7 @@ const cartReducer = createSlice({
         state.totalAmount += price * updateItem.amount;
         state.items[itemIndex] = updateItem;
       }
-      localStorage.setItem('electroshop-user-cart', JSON.stringify(state));
+      localStorage.setItem('medicare-user-cart', JSON.stringify(state));
     },
     REMOVE_ITEM(state, action: PayloadAction<string>) {
       const itemIndex = state.items.findIndex(
@@ -86,7 +86,7 @@ const cartReducer = createSlice({
       }
 
       if (state.items.length <= 0)
-        localStorage.removeItem('electroshop-user-cart');
+        localStorage.removeItem('medicare-user-cart');
     },
     SHOW_CART(state) {
       state.showCart = !state.showCart;

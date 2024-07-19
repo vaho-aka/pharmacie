@@ -6,7 +6,10 @@ require_once '../../models/User.php';
 ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
+$_SERVER['REQUEST_METHOD'] === 'POST';
+
 try {
+
   // Get the JSON data from the request body
   $jsonData = file_get_contents('php://input');
   $data = json_decode($jsonData, true);

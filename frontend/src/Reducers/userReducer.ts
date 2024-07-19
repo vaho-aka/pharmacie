@@ -58,7 +58,7 @@ const userReducer = createSlice({
         token: '',
       };
 
-      localStorage.removeItem('electroshop-user-info');
+      localStorage.removeItem('medicare-user-info');
     },
   },
 });

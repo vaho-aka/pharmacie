@@ -4,8 +4,6 @@ require_once '../../config/Database.php';
 require_once '../../models/Product.php';
 
 ErrorMiddleware::setHeaders();
-ErrorMiddleware::handleOptions();
-
 
 try {
   // Get the JSON data from the request body
