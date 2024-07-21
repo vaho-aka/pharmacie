@@ -1,7 +1,7 @@
 import { RiCheckboxCircleFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { updateUserProfile } from '../actions/userActions';
 
 const tableClasses =
@@ -17,7 +17,6 @@ const AccountPage = () => {
   const [userName, setUserName] = useState(userLoggedIn.username);
   const [email, setEmail] = useState(userLoggedIn.email);
   const [password, setPassword] = useState('');
-  const inputFileRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (
@@ -35,10 +34,6 @@ const AccountPage = () => {
     dispatch(
       updateUserProfile(userLoggedIn.id, userName, email, password && password)
     );
-
-    if (inputFileRef.current) {
-      inputFileRef.current.value = '';
-    }
   };
 
   return (

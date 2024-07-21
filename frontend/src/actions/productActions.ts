@@ -7,8 +7,15 @@ export const getProducts = (): AppThunk => async (dispatch) => {
   try {
     dispatch(productActions.GET_PRODUCT_REQUEST());
 
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
     const { data } = await axios.get<Item[]>(
-      'http://localhost/pharmacie/backend/api/product/read.php'
+      'http://localhost/pharmacie/backend/api/product/read.php',
+      config
     );
     dispatch(productActions.GET_PRODUCT_SUCCESS(data));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,8 +35,52 @@ export const getProductById =
     try {
       dispatch(productActions.GET_PRODUCT_REQUEST());
 
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
       const { data } = await axios.get(
-        `http://localhost/pharmacie/backend/api/product/read_single.php?id=${id}&category_id=${category_id}`
+        `http://localhost/pharmacie/backend/api/product/read_single.php?id=${id}&category_id=${category_id}`,
+        config
+      );
+
+      dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+
+      dispatch(productActions.GET_PRODUCT_FAIL(message));
+    }
+  };
+
+export const updateProduct =
+  (
+    id?: string,
+    name?: string,
+    price?: string,
+    onSale?: number,
+    description?: string,
+    countInStock?: string
+  ): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(productActions.GET_PRODUCT_REQUEST());
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put(
+        `http://localhost/pharmacie/backend/api/product/read_single.php?id=${id}`,
+        { name, price, onSale, description, countInStock },
+        config
       );
 
       dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));

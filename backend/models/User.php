@@ -27,13 +27,15 @@ class User
 
     $stmt->execute();
 
+
     if ($stmt->rowCount() == 1) {
-      $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      if (password_verify($this->password, $row['password'])) {
-        $this->user_id = $row['user_id'];
-        $this->username = $row['username'];
-        $this->created_at = $row['created_at'];
-        $this->is_admin = $row['is_admin'];
+      $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+      if (password_verify($this->password, $data['password'])) {
+        $this->user_id = $data['user_id'];
+        $this->username = $data['username'];
+        $this->created_at = $data['created_at'];
+        $this->is_admin = $data['is_admin'];
 
         return true;
       }
@@ -53,8 +55,8 @@ class User
     $stmt->execute();
 
     // Fetch if the email is already in use
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($row) return false;
+    $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($data) return false;
 
     $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
     // $query = 'INSERT INTO ' . $this->table . ' (username, email, password) VALUES (:username, :email, :password)';
@@ -154,12 +156,6 @@ class User
                   WHERE user_id = :user_id';
 
     $stmt = $this->conn->prepare($query);
-
-    $this->username = $this->username;
-    $this->email = $this->email;
-    $this->password = $this->password;
-    $this->is_admin = $this->is_admin;
-    $this->user_id = $this->user_id;
 
     $stmt->bindParam(':username', $this->username);
     $stmt->bindParam(':email', $this->email);

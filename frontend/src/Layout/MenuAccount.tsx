@@ -41,7 +41,7 @@ const MenuAccount = () => {
       >
         {userLoggedIn.username ? (
           <div className="flex items-center gap-2 py-2 sm:p-0">
-            <span>{userLoggedIn.username}</span>
+            <span>{userLoggedIn.username.split(' ')[0]}</span>
             <RiArrowDropDownLine size={22} />
           </div>
         ) : (

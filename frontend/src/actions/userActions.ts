@@ -142,7 +142,13 @@ export const deleteUser =
   };
 
 export const updateUserProfile =
-  (id: string, username: string, email: string, password?: string): AppThunk =>
+  (
+    id: string,
+    username: string,
+    email: string,
+    password?: string,
+    isAdmin?: string
+  ): AppThunk =>
   async (dispatch) => {
     try {
       dispatch(userActions.GET_USER_REQUEST());
@@ -153,23 +159,19 @@ export const updateUserProfile =
         },
       };
 
-      console.log(
-        'Request URL:',
-        `http://localhost/pharmacie/backend/api/user/update.php?id=${id}`
-      );
-      console.log(
-        'Request Body:',
-        JSON.stringify({ username, email, password })
-      );
-      console.log('Request Headers:', config.headers);
-
-      const { data } = await axios.put<User>(
+      const { data } = await axios.put(
         `http://localhost/pharmacie/backend/api/user/update.php?id=${id}`,
-        JSON.stringify({ username, email, password }),
+        {
+          username,
+          email,
+          password,
+          isAdmin,
+        },
         config
       );
+
       dispatch(userActions.GET_USER_SUCCESS(data));
-      localStorage.setItem('medicare-user-info', JSON.stringify(data));
+      localStorage.setItem('connectopia-user-info', JSON.stringify(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const message =

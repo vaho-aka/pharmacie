@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getProductById } from '../actions/productActions';
+import { getProductById, updateProduct } from '../actions/productActions';
 import { useParams } from 'react-router-dom';
 import { Switch } from '@headlessui/react';
 import LoadingSpinner from '../Layout/LoadingSpinner';
@@ -35,6 +35,19 @@ const AdminEditProductPage = () => {
   if (error) {
     return <div>Product not found</div>;
   }
+
+  const updateProductHandler = () => {
+    dispatch(
+      updateProduct(
+        product._id,
+        productName,
+        price,
+        enabled ? 1 : 2,
+        desc,
+        count.toString()
+      )
+    );
+  };
 
   return (
     <form className="flex gap-4 w-full lg:flex-row flex-col">
@@ -107,6 +120,12 @@ const AdminEditProductPage = () => {
             onChange={(e) => setDesc(e.target.value)}
           />
         </div>
+        <button
+          onClick={updateProductHandler}
+          className="font-semibold bg-lime-500 text-lime-800 py-2 rounded-md"
+        >
+          update product
+        </button>
       </div>
     </form>
   );

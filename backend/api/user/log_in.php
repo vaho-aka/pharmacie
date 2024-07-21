@@ -6,7 +6,6 @@ require_once '../../models/User.php';
 ErrorMiddleware::setHeaders();
 ErrorMiddleware::handleOptions();
 
-$_SERVER['REQUEST_METHOD'] === 'POST';
 
 try {
   // Check if it's a DELETE request
@@ -38,6 +37,7 @@ try {
   $user->password = $data['password'];
 
   $loginResult = $user->login();
+
   if ($loginResult) {
     echo json_encode([
       'id' => $user->user_id,
