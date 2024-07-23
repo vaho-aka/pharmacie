@@ -142,13 +142,7 @@ export const deleteUser =
   };
 
 export const updateUserProfile =
-  (
-    id: string,
-    username: string,
-    email: string,
-    password?: string,
-    isAdmin?: string
-  ): AppThunk =>
+  (id: string, username: string, email: string, password?: string): AppThunk =>
   async (dispatch) => {
     try {
       dispatch(userActions.GET_USER_REQUEST());
@@ -165,7 +159,6 @@ export const updateUserProfile =
           username,
           email,
           password,
-          isAdmin,
         },
         config
       );
@@ -200,6 +193,39 @@ export const getUserById =
         config
       );
       dispatch(userActions.GET_USER_BY_ID(data));
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+
+      dispatch(userActions.GET_USER_FAIL(message));
+    }
+  };
+
+export const updateUserProfileAsAdmin =
+  (id: string, isAdmin: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(userActions.GET_USER_REQUEST());
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.put(
+        `http://localhost/pharmacie/backend/api/user/update.php?id=${id}`,
+        {
+          isAdmin,
+        },
+        config
+      );
+
+      dispatch(userActions.GET_USER_BY_ID(data));
+      localStorage.setItem('connectopia-user-info', JSON.stringify(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const message =

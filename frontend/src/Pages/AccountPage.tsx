@@ -40,14 +40,14 @@ const AccountPage = () => {
     <div className="flex flex-col gap-4 lg:flex-row">
       <div className="max-w-[25rem] w-full">
         <h1 className="text-2xl border-l-8 font-semibold border-lime-500 px-4">
-          User's profil
+          User's profile
         </h1>
         <form
           className="w-full sm:border-2 sm:p-4 my-4 rounded-md sm:bg-white"
           onSubmit={modifyProfilHandler}
         >
           <div className="flex flex-col gap-2 mb-2">
-            <label htmlFor="name">Nom d'utilisateur</label>
+            <label htmlFor="name">Username</label>
             <input
               type="text"
               id="name"
@@ -57,7 +57,7 @@ const AccountPage = () => {
             />
           </div>
           <div className="flex flex-col gap-2 mb-2">
-            <label htmlFor="email">Adresse email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               value={email}
@@ -67,7 +67,7 @@ const AccountPage = () => {
             />
           </div>
           <div className="flex flex-col gap-2 mb-2">
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="password">Password</label>
             <input
               id="password"
               onChange={(e) => setPassword(e.target.value)}
@@ -81,7 +81,7 @@ const AccountPage = () => {
             disabled={!isModifyed ? true : false}
             className="active:translate-y-1 disabled:bg-neutral-500 disabled:cursor-not-allowed disabled:text-white transition-all w-full py-2 bg-lime-500 rounded-md text-lime-900 font-semibold mt-4"
           >
-            Méttre à jour mon profil
+            Update my profile
           </button>
         </form>
       </div>

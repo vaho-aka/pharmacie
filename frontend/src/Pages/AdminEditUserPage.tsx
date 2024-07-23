@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getUserById } from '../actions/userActions';
+import { getUserById, updateUserProfileAsAdmin } from '../actions/userActions';
 import { useParams } from 'react-router-dom';
 import { Switch } from '@headlessui/react';
 import LoadingSpinner from '../Layout/LoadingSpinner';
@@ -30,12 +30,21 @@ const AdminEditUserPage = () => {
     return <div>User not found</div>;
   }
 
+  const modifyProfilHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    dispatch(updateUserProfileAsAdmin(user.id, isAdmin ? '1' : '0'));
+  };
+
   return (
     <div className="max-w-96 mx-auto h-full">
       <div className="w-[150px] h-[150px] flex justify-center items-center ring rounded-full ring-neutral-800 text-neutral-800 mx-auto py-10">
         <RiUserLine size={100} />
       </div>
-      <form className="flex-1 flex flex-col gap-4">
+      <form
+        onSubmit={modifyProfilHandler}
+        className="flex-1 flex flex-col gap-4"
+      >
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="font-semibold">
             username
