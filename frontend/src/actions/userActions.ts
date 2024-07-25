@@ -114,7 +114,7 @@ export const getAllUsers = (): AppThunk => async (dispatch) => {
 };
 
 export const deleteUser =
-  (id?: string): AppThunk =>
+  (id: string): AppThunk =>
   async (dispatch) => {
     try {
       dispatch(userActions.GET_USER_REQUEST());

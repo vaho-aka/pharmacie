@@ -21,7 +21,7 @@ const Cart = () => {
 
   const clickHandler = () => {
     const redirect = !userLoggedIn.username
-      ? '/login?redirect=/shipping'
+      ? '/auth?redirect=/shipping'
       : '/shipping';
 
     navigate(redirect);

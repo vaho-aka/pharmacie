@@ -18,11 +18,11 @@ try {
   $data = json_decode($rawData, true);
 
   // Check if user_id is set in the JSON data
-  if (!isset($data['user_id'])) {
+  if (!isset($data['id'])) {
     throw new InvalidArgumentException('User ID is required');
   }
 
-  $id = $data['user_id'];
+  $id = $data['id'];
 
   $database = new Database();
   $db = $database->connect();

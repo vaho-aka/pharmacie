@@ -44,7 +44,7 @@ const Navigation = () => {
           {showLogin ? (
             <li className="">
               <Link
-                to="/login"
+                to="/auth"
                 className=" py-2 bg-lime-500 rounded-lg text-white font-semibold flex items-center gap-2 px-8"
               >
                 <span>Login</span>

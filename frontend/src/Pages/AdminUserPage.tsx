@@ -19,7 +19,9 @@ const AdminUserPage = () => {
   const [localUsers, setLocalUsers] = useState(users);
 
   useEffect(() => {
-    dispatch(getAllUsers());
+    if (!users) {
+      dispatch(getAllUsers());
+    }
     setLocalUsers(users);
   }, [dispatch, users]);
 
