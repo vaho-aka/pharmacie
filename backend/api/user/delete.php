@@ -28,9 +28,7 @@ try {
 
   // Delete user
   if ($user->delete()) {
-    echo json_encode([
-      'message' => 'User Deleted Successfully',
-    ]);
+    echo json_encode('User Deleted Successfully');
   } else {
     throw new Exception('User deletion failed');
   }

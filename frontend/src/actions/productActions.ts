@@ -20,7 +20,7 @@ export const getProducts = (): AppThunk => async (dispatch) => {
     dispatch(productActions.GET_PRODUCT_SUCCESS(data));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    dispatch(productActions.GET_PRODUCT_FAIL(error.response.data.error));
+    dispatch(productActions.GET_PRODUCT_FAIL(error?.response?.data?.error));
   }
 };
 
@@ -44,7 +44,7 @@ export const getProductById =
       dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      dispatch(productActions.GET_PRODUCT_FAIL(error.response.data.error));
+      dispatch(productActions.GET_PRODUCT_FAIL(error?.response?.data?.error));
     }
   };
 
@@ -76,6 +76,6 @@ export const updateProduct =
       dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      dispatch(productActions.GET_PRODUCT_FAIL(error.response.data.error));
+      dispatch(productActions.GET_PRODUCT_FAIL(error?.response?.data?.error));
     }
   };

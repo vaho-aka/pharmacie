@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import {
-  getAllUsers,
-  getUserById,
-  updateUserProfileAsAdmin,
-} from '../actions/userActions';
+import { getUserById, updateUserProfileAsAdmin } from '../actions/userActions';
 import { useParams } from 'react-router-dom';
 import { Switch } from '@headlessui/react';
 import LoadingSpinner from '../Layout/LoadingSpinner';
 import { RiUserLine } from 'react-icons/ri';
+import { userActions } from '../Reducers/userReducer';
 
 const AdminEditUserPage = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +35,7 @@ const AdminEditUserPage = () => {
     e.preventDefault();
 
     dispatch(updateUserProfileAsAdmin(user.id, isAdmin ? '1' : '0'));
-    dispatch(getAllUsers());
+    dispatch(userActions.GET_ALL_USERS([]));
   };
 
   return (

@@ -28,7 +28,7 @@ export const login =
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       // console.log(error.response.data.error);
-      dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+      dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
     }
   };
 
@@ -40,7 +40,7 @@ export const logout = (): AppThunk => async (dispatch) => {
     dispatch(userActions.USER_LOG_OUT());
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+    dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
   }
 };
 
@@ -69,7 +69,7 @@ export const register =
       localStorage.setItem('medicare-user-info', JSON.stringify(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+      dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
     }
   };
 
@@ -90,7 +90,7 @@ export const getAllUsers = (): AppThunk => async (dispatch) => {
     dispatch(userActions.GET_ALL_USERS(data));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+    dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
   }
 };
 
@@ -113,7 +113,7 @@ export const deleteUser =
       dispatch(userActions.DELETE_USER_SUCCESS(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+      dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
     }
   };
 
@@ -143,7 +143,7 @@ export const updateUserProfile =
       localStorage.setItem('connectopia-user-info', JSON.stringify(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+      dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
     }
   };
 
@@ -166,7 +166,7 @@ export const getUserById =
       dispatch(userActions.GET_USER_BY_ID(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+      dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
     }
   };
 
@@ -194,6 +194,6 @@ export const updateUserProfileAsAdmin =
       localStorage.setItem('connectopia-user-info', JSON.stringify(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      dispatch(userActions.GET_USER_FAIL(error.response.data.error));
+      dispatch(userActions.GET_USER_FAIL(error?.response?.data?.error));
     }
   };
