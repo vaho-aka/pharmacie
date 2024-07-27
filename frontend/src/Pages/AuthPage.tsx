@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   RiArchive2Line,
   RiCapsuleLine,
+  RiErrorWarningLine,
   RiEyeLine,
   RiEyeOffLine,
 } from 'react-icons/ri';
@@ -13,13 +14,14 @@ import { login as loginAction } from './../actions/userActions';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+import { userActions } from './../Reducers/userReducer';
 
 const AuthPage = () => {
   const dispatch = useAppDispatch();
   const { search } = useLocation();
   const navigate = useNavigate();
   const [toggleTabs, setToggleTabs] = useState(0);
-  const { userLoggedIn } = useAppSelector((state) => state.user);
+  const { userLoggedIn, error } = useAppSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
 
   const redirect = search ? search.split('=')[1] : '/';
@@ -57,6 +59,7 @@ const AuthPage = () => {
   const changeTabsHandler = (idx: number) => {
     setShowPassword(false);
     setToggleTabs(idx);
+    dispatch(userActions.GET_USER_FAIL(''));
   };
 
   return (
@@ -93,6 +96,12 @@ const AuthPage = () => {
                 'data-[enter]:duration-400 data-[enter]:ease-in'
               )}
             >
+              {error && (
+                <div className="bg-red-100 rounded-md flex items-center gap-2 py-2 justify-center text-red-800">
+                  <RiErrorWarningLine size={30} />
+                  <h1>{error}</h1>
+                </div>
+              )}
               <div className="flex flex-col gap-2 mb-2">
                 <label>Email</label>
                 <input
@@ -185,6 +194,12 @@ const AuthPage = () => {
                 'data-[enter]:duration-400 data-[enter]:ease-out'
               )}
             >
+              {error && (
+                <div className="bg-red-100 rounded-md flex items-center gap-2 py-2 justify-center text-red-800">
+                  <RiErrorWarningLine size={30} />
+                  <h1>{error}</h1>
+                </div>
+              )}
               <div className="flex flex-col gap-2 mb-2">
                 <label htmlFor="name">Nom d'utilisateur</label>
                 <input

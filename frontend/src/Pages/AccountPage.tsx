@@ -1,4 +1,4 @@
-import { RiCheckboxCircleFill } from 'react-icons/ri';
+import { RiCheckboxCircleFill, RiErrorWarningLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ const inputClasses =
 
 const AccountPage = () => {
   const dispatch = useAppDispatch();
-  const { userLoggedIn } = useAppSelector((state) => state.user);
+  const { userLoggedIn, error } = useAppSelector((state) => state.user);
   const [isModifyed, setIsModifyed] = useState(false);
   const [userName, setUserName] = useState(userLoggedIn.username);
   const [email, setEmail] = useState(userLoggedIn.email);
@@ -46,6 +46,12 @@ const AccountPage = () => {
           className="w-full sm:border-2 sm:p-4 my-4 rounded-md sm:bg-white"
           onSubmit={modifyProfilHandler}
         >
+          {error && (
+            <div className="bg-red-100 rounded-md flex items-center gap-2 py-2 justify-center text-red-800">
+              <RiErrorWarningLine size={30} />
+              <h1>{error}</h1>
+            </div>
+          )}
           <div className="flex flex-col gap-2 mb-2">
             <label htmlFor="name">Username</label>
             <input

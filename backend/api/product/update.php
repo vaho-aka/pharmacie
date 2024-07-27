@@ -44,9 +44,9 @@ try {
   if (isset($data['description'])) $product->description = $data['description'];
   if (isset($data['price'])) $product->price = $data['price'];
   if (isset($data['category_id'])) $product->category_id = $data['category_id'];
-  if (isset($data['on_sale'])) $product->on_sale = $data['on_sale'];
-  if (isset($data['image_url'])) $product->image_url = $data['image_url'];
-  if (isset($data['count_in_stock'])) $product->count_in_stock = $data['count_in_stock'];
+  if (isset($data['onSale'])) $product->on_sale = $data['onSale'];
+  if (isset($data['imageUrl'])) $product->image_url = $data['imageUrl'];
+  if (isset($data['countInStock'])) $product->count_in_stock = $data['countInStock'];
 
   if ($product->update()) {
     echo json_encode([

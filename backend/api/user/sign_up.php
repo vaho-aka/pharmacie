@@ -47,6 +47,8 @@ try {
   $user->email = $data['email'];
   $user->password = $data['password'];
 
+  if ($user->login()) throw new InvalidArgumentException('Email already in use');
+
   if ($user->sign_up()) {
     http_response_code(201);
     echo json_encode([
@@ -57,7 +59,7 @@ try {
       'isAdmin' => $user->is_admin,
     ]);
   } else {
-    throw new InvalidArgumentException('Email already in use');
+    throw new InvalidArgumentException('Invalid email or password');
   }
 } catch (Exception $e) {
   ErrorMiddleware::handleError($e);

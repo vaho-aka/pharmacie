@@ -14,7 +14,7 @@ class ErrorMiddleware
       $errorMessage = $e ? $e->getMessage() : 'Database error';
     } elseif ($e instanceof UnauthorizedException) {
       $statusCode = 401;
-      $errorMessage = $e ? $e->getMessage() : 'Unauthorized';
+      $errorMessage = $e ? $e->getMessage() : 'Invalid credentials';
     } elseif ($e instanceof NotFoundException) {
       $statusCode = 404;
       $errorMessage = $e ? $e->getMessage() : 'Not found';

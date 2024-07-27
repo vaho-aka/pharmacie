@@ -48,16 +48,6 @@ class User
   // Create new user
   public function sign_up()
   {
-    $query = 'SELECT * FROM ' . $this->table . ' WHERE email = :email';
-    $stmt = $this->conn->prepare($query);
-
-    $stmt->bindParam(':email', $this->email);
-    $stmt->execute();
-
-    // Fetch if the email is already in use
-    $data = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($data) return false;
-
     $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
     // $query = 'INSERT INTO ' . $this->table . ' (username, email, password) VALUES (:username, :email, :password)';
     $query = "INSERT INTO " . $this->table . " (username, password, email) VALUES (:username, :password, :email)";

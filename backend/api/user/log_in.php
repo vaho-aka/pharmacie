@@ -47,7 +47,7 @@ try {
       'isAdmin' => $user->is_admin,
     ]);
   } else {
-    throw new UnauthorizedException($loginResult);
+    throw new UnauthorizedException('Invalid email or password');
   }
 } catch (Exception $e) {
   ErrorMiddleware::handleError($e);

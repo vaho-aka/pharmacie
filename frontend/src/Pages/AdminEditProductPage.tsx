@@ -13,7 +13,7 @@ const AdminEditProductPage = () => {
   const [desc, setDesc] = useState('');
   const [price, setPrice] = useState(product.price);
   const [count, setCount] = useState(0);
-  const [enabled, setEnabled] = useState(+product.onSale !== 1 ? false : true);
+  const [enabled, setEnabled] = useState(+product.onSale === 1 ? true : false);
 
   useEffect(() => {
     dispatch(getProductById(productId));

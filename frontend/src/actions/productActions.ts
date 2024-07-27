@@ -20,12 +20,7 @@ export const getProducts = (): AppThunk => async (dispatch) => {
     dispatch(productActions.GET_PRODUCT_SUCCESS(data));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message;
-
-    dispatch(productActions.GET_PRODUCT_FAIL(message));
+    dispatch(productActions.GET_PRODUCT_FAIL(error.response.data.error));
   }
 };
 
@@ -49,23 +44,18 @@ export const getProductById =
       dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-
-      dispatch(productActions.GET_PRODUCT_FAIL(message));
+      dispatch(productActions.GET_PRODUCT_FAIL(error.response.data.error));
     }
   };
 
 export const updateProduct =
   (
-    id?: string,
-    name?: string,
-    price?: string,
-    onSale?: number,
-    description?: string,
-    countInStock?: string
+    id: string,
+    name: string,
+    price: string,
+    onSale: number,
+    description: string,
+    countInStock: string
   ): AppThunk =>
   async (dispatch) => {
     try {
@@ -78,7 +68,7 @@ export const updateProduct =
       };
 
       const { data } = await axios.put(
-        `http://localhost/pharmacie/backend/api/product/read_single.php?id=${id}`,
+        `http://localhost/pharmacie/backend/api/product/update.php?id=${id}`,
         { name, price, onSale, description, countInStock },
         config
       );
@@ -86,11 +76,6 @@ export const updateProduct =
       dispatch(productActions.GET_PRODCUT_BY_ID_SUCCESS(data));
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      const message =
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-
-      dispatch(productActions.GET_PRODUCT_FAIL(message));
+      dispatch(productActions.GET_PRODUCT_FAIL(error.response.data.error));
     }
   };

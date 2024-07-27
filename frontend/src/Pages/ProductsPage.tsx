@@ -43,12 +43,14 @@ const ProductsPage = () => {
 
   return (
     <div className="grid grid-cols-1 max-w-[700px] lg:grid-cols-2 gap-5 lg:items-stretch lg:max-w-none mx-auto">
-      <div className="max-w-[600px] h-[600px] mx-auto bg-gray-200/20 w-full flex items-center justify-center">
-        <img
-          src={product.imageUrl}
-          className="max-w-full max-h-full w-auto h-auto object-contain"
-          alt={product.name}
-        />
+      <div className="flex justify-center items-center">
+        <div className="max-w-[600px] h-[600px] mx-auto bg-gray-200/20 w-full flex items-center justify-center">
+          <img
+            src={product.imageUrl}
+            className="max-w-full max-h-full w-auto h-auto object-contain"
+            alt={product.name}
+          />
+        </div>
       </div>
       <div className="flex flex-col justify-between">
         <h1 className="border-l-8 font-semibold text-xl border-lime-500 pl-5">

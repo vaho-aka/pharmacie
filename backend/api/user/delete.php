@@ -13,16 +13,12 @@ try {
     throw new InvalidArgumentException('Only DELETE requests are allowed');
   }
 
-  // Get the raw DELETE data
-  $rawData = file_get_contents("php://input");
-  $data = json_decode($rawData, true);
-
   // Check if user_id is set in the JSON data
-  if (!isset($data['id'])) {
+  if (!isset($_GET['id'])) {
     throw new InvalidArgumentException('User ID is required');
   }
 
-  $id = $data['id'];
+  $id = $_GET['id'];
 
   $database = new Database();
   $db = $database->connect();
