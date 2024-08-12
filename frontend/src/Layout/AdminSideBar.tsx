@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 const AdminSideBar = () => {
   return (
-    <ul className="min-w-60 calc bg-neutral-800 rounded-md p-1 text-white flex gap-1 flex-col">
+    <ul className="min-w-60 calc sticky top-5 left-0 bg-neutral-800 rounded-md p-1 text-white flex gap-1 flex-col">
       <NavLink
         className={({ isActive }) =>
           `${

@@ -39,7 +39,7 @@ try {
   $product->category_id = $data['category_id'];
   $product->count_in_stock = $data['count_in_stock'];
   $product->on_sale = $data['on_sale'] ?? false;
-  $product->image_url = $data['image_url'] ?? null;
+  $product->image_url = $data['image_url'];
 
   $result = $product->create();
 

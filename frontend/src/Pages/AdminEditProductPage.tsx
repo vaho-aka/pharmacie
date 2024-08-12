@@ -51,12 +51,14 @@ const AdminEditProductPage = () => {
 
   return (
     <form className="flex gap-4 w-full lg:flex-row flex-col">
-      <div className="max-w-[600px]  lg:flex-1 h-[300px] lg:h-[600px] mx-auto bg-gray-200/20 w-full flex items-center justify-center">
-        <img
-          src={product.imageUrl}
-          className="max-w-full max-h-full w-auto h-auto object-contain"
-          alt={product.name}
-        />
+      <div className="flex justify-center items-center  bg-gray-200/20">
+        <div className="max-w-[600px] lg:flex-1 h-[300px] lg:h-[600px] w-full flex items-center justify-center">
+          <img
+            src={product.imageUrl}
+            className="max-w-full max-h-full w-auto h-auto object-contain"
+            alt={product.name}
+          />
+        </div>
       </div>
       <div className="flex-1 flex flex-col gap-4">
         <div className="flex flex-col gap-2">

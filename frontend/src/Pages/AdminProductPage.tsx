@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { getProducts } from '../actions/productActions';
+import { deleteProduct, getProducts } from '../actions/productActions';
 import { RiDeleteBinLine, RiEditLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { productActions } from '../Reducers/productReducer';
@@ -12,23 +12,23 @@ const tableClasses =
 const Admin = () => {
   const dispatch = useAppDispatch();
   const { products } = useAppSelector((state) => state.product);
-  // const [localProducts, setLocalProducts] = useState(products);
+  const [localProducts, setLocalProducts] = useState(products);
 
   const formatter = new Intl.NumberFormat('de-DE');
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (!products[0]) {
       dispatch(getProducts());
     }
-    // setLocalProducts(products);
+    setLocalProducts(products);
   }, [dispatch, products]);
 
-  // const deleteProductHandler = (productId: string) => {
-  //   dispatch(deleteUser(userId));
-  //   setLocalProducts((prevProds) =>
-  //     prevProds.filter((prod) => prod._id !== productId)
-  //   );
-  // };
+  const deleteProductHandler = (productId: string) => {
+    dispatch(deleteProduct(productId));
+    setLocalProducts((prevProds) =>
+      prevProds.filter((prod) => prod._id !== productId)
+    );
+  };
 
   useEffect(() => {
     dispatch(getProducts());
@@ -58,7 +58,7 @@ const Admin = () => {
             <span className="text-right">Action</span>
           </div>
           <ul className="bg-white">
-            {products.map((product) => (
+            {localProducts.map((product) => (
               <li key={product._id} className={`${tableClasses} py-2 border-b`}>
                 <span className="hidden md:block">{product._id}</span>
                 <span className="line-clamp-1">{product.name}</span>
@@ -78,7 +78,10 @@ const Admin = () => {
                   >
                     <RiEditLine size={24} />
                   </Link>
-                  <button className="text-red-600">
+                  <button
+                    onClick={deleteProductHandler.bind(null, product._id)}
+                    className="text-red-600"
+                  >
                     <RiDeleteBinLine size={24} />
                   </button>
                 </div>

@@ -13,7 +13,7 @@ const AdminLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   }, [dispatch]);
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 relative">
       <AdminSideBar />
       <div className="w-full">{children}</div>
     </div>

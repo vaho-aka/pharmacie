@@ -79,3 +79,27 @@ export const updateProduct =
       dispatch(productActions.GET_PRODUCT_FAIL(error?.response?.data?.error));
     }
   };
+
+export const deleteProduct =
+  (id: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(productActions.GET_PRODUCT_REQUEST());
+
+      const config = {
+        headers: {
+          'content-type': 'application/json',
+        },
+      };
+
+      const { data } = await axios.delete<string>(
+        `http://localhost/pharmacie/backend/api/product/delete.php?id=${id}`,
+        config
+      );
+
+      console.log(data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      dispatch(productActions.GET_PRODUCT_FAIL(error?.response?.data?.error));
+    }
+  };

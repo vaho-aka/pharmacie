@@ -39,7 +39,7 @@ const AdminEditUserPage = () => {
   };
 
   return (
-    <div className="max-w-96 mx-auto h-full">
+    <div className="max-w-96 mx-auto h-full pt-10">
       <div className="w-[150px] h-[150px] flex justify-center items-center ring rounded-full ring-neutral-800 text-neutral-800 mx-auto py-10">
         <RiUserLine size={100} />
       </div>
